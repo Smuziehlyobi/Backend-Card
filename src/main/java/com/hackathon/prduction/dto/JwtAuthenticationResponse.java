@@ -1,4 +1,4 @@
-package com.hackathon.prduction.domain.dto;
+package com.hackathon.prduction.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

@@ -1,17 +1,19 @@
-package com.hackathon.prduction.domain.entity;
+package com.hackathon.prduction.entity;
 
 import jakarta.persistence.*;
-import lombok.*;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 @Getter
 @Setter
-@ToString
 @NoArgsConstructor
 @Entity
-@Table(name = "cards")
+@Table(name = "card")
 
-public class CardEntity {
+public class Card {
     @Id
+    @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 

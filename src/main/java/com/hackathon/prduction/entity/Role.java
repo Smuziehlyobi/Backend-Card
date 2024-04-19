@@ -1,16 +1,19 @@
-package com.hackathon.prduction.domain.entity;
+package com.hackathon.prduction.entity;
+
 import jakarta.persistence.*;
-import lombok.*;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 @Getter
 @Setter
-@ToString
 @NoArgsConstructor
 @Entity
-@Table(name = "roles")
+@Table(name = "role")
 
-public class RoleEntity {
+public class Role {
     @Id
+    @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
@@ -19,5 +22,5 @@ public class RoleEntity {
 
     @ManyToOne
     @JoinColumn(name = "user")
-    private UserEntity user;
+    private User user;
 }

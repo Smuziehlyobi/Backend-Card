@@ -1,18 +1,21 @@
-package com.hackathon.prduction.domain.entity;
+package com.hackathon.prduction.entity;
+
 import jakarta.persistence.*;
-import lombok.*;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import java.sql.Timestamp;
 
 @Getter
 @Setter
-@ToString
 @NoArgsConstructor
 @Entity
-@Table(name = "events")
+@Table(name = "event")
 
-public class EventEntity {
+public class Event {
     @Id
+    @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
@@ -24,9 +27,9 @@ public class EventEntity {
 
     @ManyToOne
     @JoinColumn(name = "category")
-    private CategoryEntity category;
+    private Category category;
 
     @ManyToOne
     @JoinColumn(name = "age_category")
-    private AgeCategoryEntity ageCategoryEntity;
+    private AgeCategory ageCategoryEntity;
 }

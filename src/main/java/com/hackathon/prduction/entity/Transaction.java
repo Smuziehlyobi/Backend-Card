@@ -1,18 +1,21 @@
-package com.hackathon.prduction.domain.entity;
+package com.hackathon.prduction.entity;
+
 import jakarta.persistence.*;
-import lombok.*;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import java.sql.Timestamp;
 
 @Getter
 @Setter
-@ToString
 @NoArgsConstructor
 @Entity
-@Table(name = "transactions")
+@Table(name = "transaction")
 
-public class TransactionEntity {
+public class Transaction {
     @Id
+    @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
@@ -27,5 +30,5 @@ public class TransactionEntity {
 
     @ManyToOne
     @JoinColumn(name = "user")
-    private UserEntity user;
+    private User user;
 }

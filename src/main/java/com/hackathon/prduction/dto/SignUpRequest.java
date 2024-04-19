@@ -1,4 +1,4 @@
-package com.hackathon.prduction.domain.dto;
+package com.hackathon.prduction.dto;
 
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
@@ -16,7 +16,7 @@ public class SignUpRequest {
     private String username;
 
     @Size(min = 5, max = 255, message = "The email address must contain between 5 and 255 characters")
-        @NotBlank(message = "Email address cannot be empty")
+    @NotBlank(message = "Email address cannot be empty")
     private String email;
 
     @Size(max = 255, message = "Password length must be no more than 255 characters")

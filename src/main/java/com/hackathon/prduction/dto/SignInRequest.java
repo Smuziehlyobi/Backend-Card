@@ -1,4 +1,4 @@
-package com.hackathon.prduction.domain.dto;
+package com.hackathon.prduction.dto;
 
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;

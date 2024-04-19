@@ -1,19 +1,22 @@
-package com.hackathon.prduction.domain.entity;
+package com.hackathon.prduction.entity;
+
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
-import lombok.*;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import java.util.List;
 
 @Getter
 @Setter
-@ToString
 @NoArgsConstructor
 @Entity
-@Table(name = "categories")
+@Table(name = "age_categorie")
 
-public class CategoryEntity {
+public class AgeCategory {
     @Id
+    @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
@@ -25,5 +28,5 @@ public class CategoryEntity {
             cascade = CascadeType.REMOVE,
             orphanRemoval = true)
     @JsonIgnore
-    private List<EventEntity> events;
+    private List<Event> events;
 }
