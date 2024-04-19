@@ -47,14 +47,6 @@ public class UserService {
         return getByUsername(username);
     }
 
-    @Deprecated
-    public void getAdmin() {
-        var user = getCurrentUser();
-        System.out.println(getCurrentUser().toString());
-        user.setRole(Role.ROLE_ADMIN);
-        System.out.println(user);
-        save(user);
-    }
 
 
 }
