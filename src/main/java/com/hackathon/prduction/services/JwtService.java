@@ -1,7 +1,7 @@
 package com.hackathon.prduction.services;
 
 
-import com.AtomIDTest.ForumEngine.models.User;
+import com.hackathon.prduction.domain.models.User;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
@@ -62,8 +62,7 @@ public class JwtService {
     }
 
     private Claims extractAllClaims(String token) {
-        return Jwts.parser().setSigningKey(getSigningKey()).build().parseClaimsJws(token)
-                .getBody();
+        return Jwts.parser().setSigningKey(getSigningKey()).parseClaimsJws(token).getBody();
     }
 
     private Key getSigningKey() {
