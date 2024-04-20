@@ -1,4 +1,4 @@
-package com.hackathon.prduction.domain.dto;
+package com.hackathon.prduction.domain.dto.suggestion;
 
 import lombok.*;
 
@@ -7,7 +7,9 @@ import lombok.*;
 @ToString
 @AllArgsConstructor
 @NoArgsConstructor
-public class SuggestionDTO {
+@Data
+public class SuggestionResponseDTO {
+    private Long id;
     private byte[] image;
     private String header;
     private String description;

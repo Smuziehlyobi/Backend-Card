@@ -1,13 +1,12 @@
 package com.hackathon.prduction.services.impl;
 
-import com.hackathon.prduction.domain.dto.TransactionDTO;
+import com.hackathon.prduction.domain.dto.transaction.TransactionRequestDTO;
 import com.hackathon.prduction.domain.entity.Transaction;
-import com.hackathon.prduction.domain.mapper.TransactionMapper;
+import com.hackathon.prduction.domain.mapper.transaction.TransactionMapper;
 import com.hackathon.prduction.exceptions.transaction.TransactionNotFoundByIdException;
 import com.hackathon.prduction.repository.TransactionRepository;
 import com.hackathon.prduction.services.TransactionService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -21,10 +20,10 @@ public class TransactionServiceImpl implements TransactionService {
 
 
     @Override
-    public TransactionDTO createTransaction(Transaction transaction) {
-        TransactionDTO transactionDTO = transactionMapper.toDto(transaction);
+    public TransactionRequestDTO createTransaction(Transaction transaction) {
+        TransactionRequestDTO transactionRequestDTO = transactionMapper.toDto(transaction);
         transactionRepository.save(transaction);
-        return transactionDTO;
+        return transactionRequestDTO;
     }
 
     @Override
@@ -37,20 +36,20 @@ public class TransactionServiceImpl implements TransactionService {
     }
 
     @Override
-    public List<TransactionDTO> getAllTransactions() {
+    public List<TransactionRequestDTO> getAllTransactions() {
         List<Transaction> transactions = transactionRepository.findAll();
-        List<TransactionDTO> transactionDTOs = transactionMapper.toDto(transactions);
-        return transactionDTOs;
+        List<TransactionRequestDTO> transactionRequestDTOS = transactionMapper.toDto(transactions);
+        return transactionRequestDTOS;
     }
 
     @Override
-    public TransactionDTO getOneTransaction(Long transactionId) throws TransactionNotFoundByIdException {
+    public TransactionRequestDTO getOneTransaction(Long transactionId) throws TransactionNotFoundByIdException {
         Transaction transaction = transactionRepository.findById(transactionId).orElse(null);
         if(transaction == null) {
             throw new TransactionNotFoundByIdException("Transaction with such ID does not exist.");
         }
-        TransactionDTO transactionDTO = transactionMapper.toDto(transaction);
-        return transactionDTO;
+        TransactionRequestDTO transactionRequestDTO = transactionMapper.toDto(transaction);
+        return transactionRequestDTO;
     }
 
 }

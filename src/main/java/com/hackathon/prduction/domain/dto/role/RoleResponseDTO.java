@@ -1,4 +1,4 @@
-package com.hackathon.prduction.domain.dto;
+package com.hackathon.prduction.domain.dto.role;
 
 import lombok.*;
 
@@ -7,6 +7,8 @@ import lombok.*;
 @ToString
 @AllArgsConstructor
 @NoArgsConstructor
-public class AgeCategoryDTO {
+@Data
+public class RoleResponseDTO {
+    private Long id;
     private String name;
 }

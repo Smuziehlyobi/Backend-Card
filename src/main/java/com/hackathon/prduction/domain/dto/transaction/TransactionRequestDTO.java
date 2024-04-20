@@ -1,12 +1,17 @@
-package com.hackathon.prduction.domain.dto;
+package com.hackathon.prduction.domain.dto.transaction;
 
 import com.hackathon.prduction.domain.entity.User;
-import lombok.Data;
+import lombok.*;
 
 import java.sql.Timestamp;
 
+@Getter
+@Setter
+@ToString
+@AllArgsConstructor
+@NoArgsConstructor
 @Data
-public class TransactionDTO {
+public class TransactionRequestDTO {
     private String name;
 
     private Integer value;

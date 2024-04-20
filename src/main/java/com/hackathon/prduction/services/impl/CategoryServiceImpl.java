@@ -1,7 +1,7 @@
 package com.hackathon.prduction.services.impl;
 
-import com.hackathon.prduction.domain.dto.CategoryDTO;
-import com.hackathon.prduction.domain.mapper.CategoryMapper;
+import com.hackathon.prduction.domain.dto.category.CategoryRequestDTO;
+import com.hackathon.prduction.domain.mapper.category.CategoryRequestMapper;
 import com.hackathon.prduction.domain.entity.Category;
 import com.hackathon.prduction.exceptions.category.CategoryNotFoundByIdException;
 import com.hackathon.prduction.repository.CategoryRepository;
@@ -17,13 +17,13 @@ public class CategoryServiceImpl implements CategoryService {
 
     private final CategoryRepository categoryRepo;
 
-    private final CategoryMapper categoryMapper;
+    private final CategoryRequestMapper categoryRequestMapper;
 
     @Override
-    public CategoryDTO createCategory(Category category) {
-        CategoryDTO categoryDTO = categoryMapper.toDto(category);
+    public CategoryRequestDTO createCategory(Category category) {
+        CategoryRequestDTO categoryRequestDTO = categoryRequestMapper.toDto(category);
         categoryRepo.save(category);
-        return categoryDTO;
+        return categoryRequestDTO;
     }
 
     @Override
@@ -36,20 +36,20 @@ public class CategoryServiceImpl implements CategoryService {
     }
 
     @Override
-    public List<CategoryDTO> getAllCategories() {
+    public List<CategoryRequestDTO> getAllCategories() {
         List<Category> categories = categoryRepo.findAll();
-        List<CategoryDTO> categoryDTOS = categoryMapper.toDto(categories);
-        return categoryDTOS;
+        List<CategoryRequestDTO> categoryRequestDTOS = categoryRequestMapper.toDto(categories);
+        return categoryRequestDTOS;
     }
 
     @Override
-    public CategoryDTO getOneCategory(Long categoryId) throws CategoryNotFoundByIdException {
+    public CategoryRequestDTO getOneCategory(Long categoryId) throws CategoryNotFoundByIdException {
         Category category = categoryRepo.findById(categoryId).orElse(null);
         if(category == null) {
             throw new CategoryNotFoundByIdException("Category with such ID does not exist.");
         }
-        CategoryDTO categoryDTO = categoryMapper.toDto(category);
-        return categoryDTO;
+        CategoryRequestDTO categoryRequestDTO = categoryRequestMapper.toDto(category);
+        return categoryRequestDTO;
     }
 
 }

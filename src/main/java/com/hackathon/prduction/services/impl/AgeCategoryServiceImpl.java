@@ -1,13 +1,12 @@
 package com.hackathon.prduction.services.impl;
 
-import com.hackathon.prduction.domain.dto.AgeCategoryDTO;
+import com.hackathon.prduction.domain.dto.agecategory.AgeCategoryRequestDTO;
 import com.hackathon.prduction.domain.entity.AgeCategory;
-import com.hackathon.prduction.domain.mapper.AgeCategoryMapper;
+import com.hackathon.prduction.domain.mapper.agecategory.AgeCategoryRequestMapper;
 import com.hackathon.prduction.exceptions.agecategory.AgeCategoryNotFoundByIdException;
 import com.hackathon.prduction.repository.AgeCategoryRepository;
 import com.hackathon.prduction.services.AgeCategoryService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -17,14 +16,14 @@ import java.util.List;
 public class AgeCategoryServiceImpl implements AgeCategoryService {
     private final AgeCategoryRepository ageCategoryRepository;
 
-    private final AgeCategoryMapper ageCategoryMapper;
+    private final AgeCategoryRequestMapper ageCategoryMapper;
 
 
     @Override
-    public AgeCategoryDTO createAgeCategory(AgeCategory ageCategory) {
-        AgeCategoryDTO ageCategoryDTO = ageCategoryMapper.toDto(ageCategory);
+    public AgeCategoryRequestDTO createAgeCategory(AgeCategory ageCategory) {
+        AgeCategoryRequestDTO ageCategoryRequestDTO = ageCategoryMapper.toDto(ageCategory);
         ageCategoryRepository.save(ageCategory);
-        return ageCategoryDTO;
+        return ageCategoryRequestDTO;
     }
 
     @Override
@@ -37,20 +36,20 @@ public class AgeCategoryServiceImpl implements AgeCategoryService {
     }
 
     @Override
-    public List<AgeCategoryDTO> getAllAgeCategories() {
+    public List<AgeCategoryRequestDTO> getAllAgeCategories() {
         List<AgeCategory> ageCategories = ageCategoryRepository.findAll();
-        List<AgeCategoryDTO> ageCategoryDTOs = ageCategoryMapper.toDto(ageCategories);
-        return ageCategoryDTOs;
+        List<AgeCategoryRequestDTO> ageCategoryRequestDTOS = ageCategoryMapper.toDto(ageCategories);
+        return ageCategoryRequestDTOS;
     }
 
     @Override
-    public AgeCategoryDTO getOneAgeCategory(Long ageCategoryId) throws AgeCategoryNotFoundByIdException {
+    public AgeCategoryRequestDTO getOneAgeCategory(Long ageCategoryId) throws AgeCategoryNotFoundByIdException {
         AgeCategory ageCategory = ageCategoryRepository.findById(ageCategoryId).orElse(null);
         if (ageCategory == null) {
             throw new AgeCategoryNotFoundByIdException("Age category with such ID does not exist.");
         }
-        AgeCategoryDTO ageCategoryDTO = ageCategoryMapper.toDto(ageCategory);
-        return ageCategoryDTO;
+        AgeCategoryRequestDTO ageCategoryRequestDTO = ageCategoryMapper.toDto(ageCategory);
+        return ageCategoryRequestDTO;
     }
 
 }
