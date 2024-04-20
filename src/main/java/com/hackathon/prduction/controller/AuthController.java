@@ -1,8 +1,6 @@
 package com.hackathon.prduction.controller;
 
-import com.hackathon.prduction.domain.dto.security.AuthDTO;
-import com.hackathon.prduction.domain.dto.security.CreateUserRequestDTO;
-import com.hackathon.prduction.domain.dto.security.RefreshJwtRequestDTO;
+import com.hackathon.prduction.domain.dto.security.*;
 import com.hackathon.prduction.domain.entity.User;
 import com.hackathon.prduction.security.service.AuthService;
 import com.hackathon.prduction.services.impl.UserService;
@@ -32,7 +30,7 @@ public class AuthController {
         }
     }
 
-    @PostMapping("/login")
+    @PostMapping("/signin")
     public  ResponseEntity<?> userLogin(@RequestBody AuthDTO authDTO){
         try {
             return ResponseEntity.ok().body(authService.login(authDTO));

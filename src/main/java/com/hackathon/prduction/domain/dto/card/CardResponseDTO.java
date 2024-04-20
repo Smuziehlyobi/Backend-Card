@@ -9,7 +9,14 @@ import lombok.*;
 @NoArgsConstructor
 @Data
 public class CardResponseDTO {
-    private Long id;
     private String value;
-    private String balance;
+
+    private Long balance;
+
+    private String firstName;
+
+    private String lastName;
+
+    private String patronymic;
+
 }
