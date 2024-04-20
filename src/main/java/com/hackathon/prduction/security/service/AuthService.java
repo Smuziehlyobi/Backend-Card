@@ -8,7 +8,6 @@ import com.hackathon.prduction.domain.entity.User;
 import com.hackathon.prduction.domain.mapper.UserMapper;
 import com.hackathon.prduction.exceptions.AuthException;
 import com.hackathon.prduction.security.jwt.JwtCore;
-import com.hackathon.prduction.security.service.impl.EmployeeServiceImpl;
 import com.hackathon.prduction.security.service.impl.UserServiceImpl;
 import io.jsonwebtoken.Claims;
 import lombok.RequiredArgsConstructor;
@@ -43,7 +42,6 @@ public class AuthService {
     private final JwtCore jwtCore;
     private final AuthenticationManager authenticationManager;
     private final UserServiceImpl userService;
-    private final UserMapper userMapper;
 
     public JwtResponse registration(CreateUserRequestDTO createUserRequestDTO) {
         if (!Objects.equals(createUserRequestDTO.getPassword(), createUserRequestDTO.getRepeatPassword())) {
