@@ -1,6 +1,7 @@
 package com.hackathon.prduction.controller;
 
 import com.hackathon.prduction.domain.dto.card.CardRequestDTO;
+import com.hackathon.prduction.domain.dto.card.PaymentRequestDTO;
 import com.hackathon.prduction.domain.dto.card.CardResponseDTO;
 import com.hackathon.prduction.domain.entity.Card;
 import com.hackathon.prduction.domain.entity.User;
@@ -9,7 +10,9 @@ import com.hackathon.prduction.services.CardService;
 import com.hackathon.prduction.services.UserService;
 import com.hackathon.prduction.services.impl.CardServiceImpl;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -45,5 +48,11 @@ public class CardController {
             return ResponseEntity.badRequest().body(e.getMessage());
         }
 
+    }
+
+    @PostMapping("/payment")
+    public ResponseEntity<?> writingFromCard(@RequestBody PaymentRequestDTO paymentRequestDTO) {
+        cardService.executePayment(paymentRequestDTO);
+        return ResponseEntity.status(HttpStatus.ACCEPTED).body("Оплата прошла успешно");
     }
 }

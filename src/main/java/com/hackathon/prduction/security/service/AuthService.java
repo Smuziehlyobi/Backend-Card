@@ -73,6 +73,7 @@ public class AuthService {
         } catch (BadCredentialsException e) {
             throw AuthException.CODE.NO_SUCH_USERNAME_OR_PWD.get();
         }
+
         final User user = userService
                 .findByEmail(authDto.getUsername())
                 .orElseThrow(AuthException.CODE.NO_SUCH_USERNAME_OR_PWD::get);
