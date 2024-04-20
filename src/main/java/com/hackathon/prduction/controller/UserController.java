@@ -18,12 +18,5 @@ public class UserController {
         this.userService = userService;
     }
 
-    @PostMapping("/signup")
-    public ResponseEntity<?> registerNewUser(User user) {
-        try {
-            return ResponseEntity.ok().body(userService.create(user));
-        } catch (Exception e){
-            return ResponseEntity.badRequest().body(e.getMessage());
-        }
-    }
+
 }
