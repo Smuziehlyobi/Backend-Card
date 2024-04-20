@@ -1,7 +1,7 @@
 package com.hackathon.prduction.config;
 
-import com.hackathon.prduction.services.JwtService;
-import com.hackathon.prduction.services.UserService;
+import com.hackathon.prduction.services.impl.JwtService;
+import com.hackathon.prduction.services.impl.UserService;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
