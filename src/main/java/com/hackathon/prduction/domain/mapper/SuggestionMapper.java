@@ -18,6 +18,4 @@ public interface SuggestionMapper extends EntityMapper<SuggestionDTO, Suggestion
     @Override
     List<SuggestionDTO> toDto(List<Suggestion> entityList);
 
-    @Override
-    void partialUpdate(Suggestion entity, SuggestionDTO dto);
 }

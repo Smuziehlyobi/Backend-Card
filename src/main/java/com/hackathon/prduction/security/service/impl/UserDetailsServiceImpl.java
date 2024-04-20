@@ -40,7 +40,7 @@ public class UserDetailsServiceImpl implements UserDetailsService {
                 user.getEmail(),
                 user.getPassword(),
                 new ArrayList<>(Collections.singletonList(
-                        new SimpleGrantedAuthority(user.getRoles().get(0).getName())))
+                        new SimpleGrantedAuthority(user.getRole().getName())))
         );
     }
 }

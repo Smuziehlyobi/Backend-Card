@@ -20,6 +20,4 @@ public interface RoleMapper extends EntityMapper<RoleDTO, Role> {
     @Override
     List<RoleDTO> toDto(List<Role> entityList);
 
-    @Override
-    void partialUpdate(Role entity, RoleDTO dto);
 }

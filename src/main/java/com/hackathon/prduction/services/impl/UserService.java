@@ -20,7 +20,7 @@ public class UserService {
 
 
     public User create(User user) {
-        if (repository.existsByUsername(user.getUsername())) {
+        if (repository.existsByUsername(user.getEmail())) {
             throw new InvalidRegistrationException("User with the same name already exists");
         }
 
@@ -37,9 +37,6 @@ public class UserService {
 
     }
 
-    public UserDetailsService userDetailsService() {
-        return this::getByUsername;
-    }
 
     public User getCurrentUser() {
         var username = SecurityContextHolder.getContext().getAuthentication().getName();

@@ -20,6 +20,4 @@ public interface TransactionMapper extends EntityMapper<TransactionDTO, Transact
     @Override
     List<TransactionDTO> toDto(List<Transaction> entityList);
 
-    @Override
-    void partialUpdate(Transaction entity, TransactionDTO dto);
 }

@@ -21,6 +21,4 @@ public interface UserMapper extends EntityMapper<UserDTO, User> {
     @Override
     List<UserDTO> toDto(List<User> entityList);
 
-    @Override
-    void partialUpdate(User entity, UserDTO dto);
 }

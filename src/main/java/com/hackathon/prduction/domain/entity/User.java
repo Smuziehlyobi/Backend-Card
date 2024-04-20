@@ -64,9 +64,6 @@ public class User {
             inverseJoinColumns = @JoinColumn(name = "id_suggestion")
     )
     @JsonIgnore
-<<<<<<< HEAD
-        private List<Role> roles;
-=======
     private Set<Suggestion> suggestions = new HashSet<>();
 
     @OnDelete(action = OnDeleteAction.CASCADE)
@@ -86,5 +83,4 @@ public class User {
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "card_id", referencedColumnName = "id")
     private Card card;
->>>>>>> f0a5ea738ef12ace7737cf3a65ae91cf335ea61f
 }

@@ -150,16 +150,16 @@
                                  onDelete="NO ACTION" onUpdate="NO ACTION"
                                  referencedColumnNames="id" validate="true"/>
         <addForeignKeyConstraint baseTableName="User_event" baseColumnNames="id_user"
-                                 constraintName="FK_user_event_User" referencedTableName="User"
+                                 constraintName="FK_user_event_User" referencedTableName="User_db"
                                  deferrable="false" initiallyDeferred="false"
                                  onDelete="NO ACTION" onUpdate="NO ACTION"
                                  referencedColumnNames="id" validate="true"/>
-        <addForeignKeyConstraint baseTableName="User_suggestion" baseColumnNames="id_Suggestion"
+        <addForeignKeyConstraint baseTableName="User_suggestion" baseColumnNames="id_suggestion"
                                  constraintName="FK_user_suggestion" referencedTableName="Suggestion"
                                  deferrable="false" initiallyDeferred="false"
                                  onDelete="NO ACTION" onUpdate="NO ACTION"
                                  referencedColumnNames="id" validate="true"/>
-        <addForeignKeyConstraint baseTableName="User_suggestion" baseColumnNames="id_User"
+        <addForeignKeyConstraint baseTableName="User_suggestion" baseColumnNames="id_user"
                                  constraintName="FK_user_suggestion_User" referencedTableName="User_db"
                                  deferrable="false" initiallyDeferred="false"
                                  onDelete="NO ACTION" onUpdate="NO ACTION"

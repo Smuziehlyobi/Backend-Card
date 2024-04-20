@@ -1,6 +1,6 @@
 package com.hackathon.prduction.domain.dto;
 
-import com.hackathon.prduction.domain.models.User;
+import com.hackathon.prduction.domain.entity.User;
 import lombok.Data;
 
 import java.sql.Timestamp;

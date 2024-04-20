@@ -20,6 +20,4 @@ public interface EventMapper extends EntityMapper<EventDTO, Event> {
     @Override
     List<EventDTO> toDto(List<Event> entityList);
 
-    @Override
-    void partialUpdate(Event entity, EventDTO dto);
 }

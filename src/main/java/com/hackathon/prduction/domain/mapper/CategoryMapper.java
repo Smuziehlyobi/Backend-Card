@@ -20,6 +20,4 @@ public interface CategoryMapper extends EntityMapper<CategoryDTO, Category>{
     @Override
     List<CategoryDTO> toDto(List<Category> entityList);
 
-    @Override
-    void partialUpdate(Category entity, CategoryDTO dto);
 }

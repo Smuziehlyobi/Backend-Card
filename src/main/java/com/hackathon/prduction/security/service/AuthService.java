@@ -85,11 +85,9 @@ public class AuthService {
             final Long id = (Long) claims.get("user_id");
             Role role = new Role();
             role.setName(roleName);
-            List<Role> roles = new ArrayList<>();
-            roles.add(role);
             User userForJwt = new User();
             userForJwt.setEmail(username);
-            userForJwt.setRoles(roles);
+            userForJwt.setRole(role);
             userForJwt.setId(Long.valueOf(id));
             final String accessToken = jwtCore.generateAccessToken(userForJwt);
             if (action.equals("refresh")) {

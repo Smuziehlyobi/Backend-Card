@@ -26,8 +26,4 @@ public interface CreateUserRequestDTOMapper extends EntityMapper<CreateUserReque
         return null;
     }
 
-    @Override
-    default void partialUpdate(User entity, CreateUserRequestDTO dto) {
-
-    }
 }

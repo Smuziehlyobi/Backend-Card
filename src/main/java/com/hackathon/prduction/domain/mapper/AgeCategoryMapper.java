@@ -21,6 +21,4 @@ public interface AgeCategoryMapper extends EntityMapper<AgeCategoryDTO, AgeCateg
     @Override
     List<AgeCategoryDTO> toDto(List<AgeCategory> entityList);
 
-    @Override
-    void partialUpdate(AgeCategory entity, AgeCategoryDTO dto);
 }

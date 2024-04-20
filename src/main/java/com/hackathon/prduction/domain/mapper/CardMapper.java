@@ -20,6 +20,4 @@ public interface CardMapper extends EntityMapper<CardDTO, Card> {
     @Override
     List<CardDTO> toDto(List<Card> entityList);
 
-    @Override
-    void partialUpdate(Card entity, CardDTO dto);
 }
