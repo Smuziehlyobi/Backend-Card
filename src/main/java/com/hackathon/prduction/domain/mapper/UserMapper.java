@@ -13,9 +13,6 @@ public interface UserMapper extends EntityMapper<UserDTO, User> {
     User toEntity(UserDTO dto);
 
     @Override
-    User toEntity(CreateUserRequestDTO createUserRequestDTO);
-
-    @Override
     UserDTO toDto(User entity);
 
     @Override
