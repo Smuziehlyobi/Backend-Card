@@ -27,8 +27,8 @@ jobs:
             export ACCESS_TOKEN=${{ secrets.ACCESS_TOKEN }}
             export DB_NAME=${{ secrets.DB_NAME }}
 
-            echo POSTGRES_USER=${{ secrets.CLIENT_POSTGRES_USER }} >> .env
-            echo POSTGRES_PASSWORD=${{ secrets.CLIENT_POSTGRES_PASSWORD }} >> .env
+            echo POSTGRES_USER=${{ secrets.POSTGRES_USER }} >> .env
+            echo POSTGRES_PASSWORD=${{ secrets.POSTGRES_PASSWORD }} >> .env
             echo POSTGRES_IP=${{ secrets.POSTGRES_IP}} >> .env
             echo REFRESH_TOKEN=${{ secrets.REFRESH_TOKEN }} >> .env
             echo ACCESS_TOKEN=${{ secrets.ACCESS_TOKEN }} >> .env
