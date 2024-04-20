@@ -27,8 +27,8 @@ services:
     depends_on:
       card-service-db:
         condition: service_healthy
-      networks:
-        - hackathon
+    networks:
+      - hackathon
     environment:
       DB_NAME: ${DB_NAME}
       POSTGRES_USER: ${POSTGRES_USER}
