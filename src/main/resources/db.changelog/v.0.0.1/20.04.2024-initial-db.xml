@@ -12,7 +12,9 @@
             <column name="first_name" type="VARCHAR(255)"/>
             <column name="patronymic" type="VARCHAR(255)"/>
             <column name="Last_name" type="VARCHAR(255)"/>
-            <column name="id_card" type="BIGINT"/>
+            <column name="id_card" type="BIGINT">
+                    <constraints unique="true"/>
+            </column>
             <column name="id_role" type="BIGINT"/>
             <column name="id_transaction" type="BIGINT"/>
             <column name="email" type="VARCHAR(30)"/>
