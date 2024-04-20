@@ -86,11 +86,34 @@
 
     <!-- Table user_event_mapping -->
     <changeSet id="create_table_user_event_mapping" author="andreynachevnyy">
-        <createTable tableName="User_Event">
+        <createTable tableName="User_event">
             <column name="id" type="INTEGER" autoIncrement="true">
                 <constraints primaryKey="true" nullable="false"/>
             </column>
             <column name="id_event" type="BIGINT"/>
+            <column name="id_user" type="BIGINT"/>
+        </createTable>
+    </changeSet>
+
+    <!-- Table Suggestion -->
+    <changeSet id="create_table_Suggestion" author="andreynachevnyy">
+        <createTable tableName="Suggestion">
+            <column name="id" type="INTEGER" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="image" type="BLOB"/>
+            <column name="header" type="VARCHAR(255)"/>
+            <column name="description" type="VARCHAR(255)"/>
+        </createTable>
+    </changeSet>
+
+    <!-- Table user_suggestion_mapping -->
+    <changeSet id="create_table_user_suggestion_mapping" author="andreynachevnyy">
+        <createTable tableName="User_suggestion">
+            <column name="id" type="INTEGER" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="id_suggestion" type="INTEGER"/>
             <column name="id_user" type="BIGINT"/>
         </createTable>
     </changeSet>
@@ -121,13 +144,23 @@
                                  deferrable="false" initiallyDeferred="false"
                                  onDelete="NO ACTION" onUpdate="NO ACTION"
                                  referencedColumnNames="id" validate="true"/>
-        <addForeignKeyConstraint baseTableName="User_Event" baseColumnNames="id_event"
+        <addForeignKeyConstraint baseTableName="User_event" baseColumnNames="id_event"
                                  constraintName="FK_user_event" referencedTableName="Event"
                                  deferrable="false" initiallyDeferred="false"
                                  onDelete="NO ACTION" onUpdate="NO ACTION"
                                  referencedColumnNames="id" validate="true"/>
-        <addForeignKeyConstraint baseTableName="User_Event" baseColumnNames="id_user"
+        <addForeignKeyConstraint baseTableName="User_event" baseColumnNames="id_user"
                                  constraintName="FK_user_event_User" referencedTableName="User"
+                                 deferrable="false" initiallyDeferred="false"
+                                 onDelete="NO ACTION" onUpdate="NO ACTION"
+                                 referencedColumnNames="id" validate="true"/>
+        <addForeignKeyConstraint baseTableName="User_suggestion" baseColumnNames="id_Suggestion"
+                                 constraintName="FK_user_suggestion" referencedTableName="Suggestion"
+                                 deferrable="false" initiallyDeferred="false"
+                                 onDelete="NO ACTION" onUpdate="NO ACTION"
+                                 referencedColumnNames="id" validate="true"/>
+        <addForeignKeyConstraint baseTableName="User_suggestion" baseColumnNames="id_User"
+                                 constraintName="FK_user_suggestion_User" referencedTableName="User_db"
                                  deferrable="false" initiallyDeferred="false"
                                  onDelete="NO ACTION" onUpdate="NO ACTION"
                                  referencedColumnNames="id" validate="true"/>
