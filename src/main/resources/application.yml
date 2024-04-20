@@ -1,16 +1,10 @@
 server:
   port: 8080
-
 spring:
   profiles:
     active: @profileActive@
   application:
     name: Card-service
-  datasource:
-      driver-class-name: org.postgresql.Driver
-      url: jdbc:postgresql://${POSTGRES_IP}:5432/${DB_NAME}
-      username: ${POSTGRES_USER}
-      password: ${POSTGRES_PASSWORD}
   liquibase:
     change-log: classpath:db/changelog/db.changelog-master.xml
   jpa:
@@ -21,3 +15,5 @@ spring:
         dialect: org.hibernate.dialect.PostgreSQLDialect
     show-sql: true
 
+access_token: ${ACCESS_TOKEN}
+refresh_token: ${REFRESH_TOKEN}
