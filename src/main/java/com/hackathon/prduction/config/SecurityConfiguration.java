@@ -1,6 +1,6 @@
 package com.hackathon.prduction.config;
 
-import com.hackathon.prduction.services.UserService;
+import com.hackathon.prduction.services.impl.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
