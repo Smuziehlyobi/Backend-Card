@@ -1,15 +1,21 @@
 package com.hackathon.prduction.security.service;
 
+import com.hackathon.prduction.domain.dto.card.CardRequestDTO;
 import com.hackathon.prduction.domain.dto.security.AuthDTO;
 import com.hackathon.prduction.domain.dto.security.CreateUserRequestDTO;
 import com.hackathon.prduction.domain.dto.security.JwtResponse;
+import com.hackathon.prduction.domain.dto.security.JwtWithCardResponseDTO;
+import com.hackathon.prduction.domain.entity.Card;
 import com.hackathon.prduction.domain.entity.Role;
 import com.hackathon.prduction.domain.entity.User;
 import com.hackathon.prduction.exceptions.AuthException;
+import com.hackathon.prduction.exceptions.card.CardNotCreatedException;
 import com.hackathon.prduction.security.jwt.JwtCore;
 import com.hackathon.prduction.security.service.impl.UserServiceImpl;
+import com.hackathon.prduction.services.CardService;
 import io.jsonwebtoken.Claims;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -39,15 +45,24 @@ public class AuthService {
     private final JwtCore jwtCore;
     private final AuthenticationManager authenticationManager;
     private final UserServiceImpl userService;
+    private final CardService cardService;
 
-    public JwtResponse registration(CreateUserRequestDTO createUserRequestDTO) {
+    public JwtWithCardResponseDTO registration(CreateUserRequestDTO createUserRequestDTO) {
         if (!Objects.equals(createUserRequestDTO.getPassword(), createUserRequestDTO.getRepeatPassword())) {
             throw AuthException.CODE.INVALID_REPEAT_PASSWORD.get();
         }
+
+        if( userService.findByEmail(createUserRequestDTO.getEmail()).isPresent() ){
+            throw AuthException.CODE.EMAIL_IN_USE.get();
+        }
+
         User user = userService.save(createUserRequestDTO);
+
         String accessToken = jwtCore.generateAccessToken(user);
         String refreshToken = jwtCore.generateRefreshToken(user);
-        return new JwtResponse(accessToken, refreshToken);
+
+        return new JwtWithCardResponseDTO(accessToken, refreshToken, user.getCard().getValue(), user.getCard().getBalance(),
+                user.getFirstName(), user.getLastName(), user.getPatronymic());
     }
 
     public JwtResponse login(AuthDTO authDto) {
