@@ -9,8 +9,7 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @Entity
-@Table(name = "card")
-
+@Table(name = "Card")
 public class Card {
     @Id
     @Column(name = "id")
@@ -22,4 +21,7 @@ public class Card {
 
     @Column(name = "balance")
     private Long balance;
+
+    @OneToOne(mappedBy = "card")
+    private User user;
 }

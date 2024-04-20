@@ -1,15 +1,18 @@
 package com.hackathon.prduction.domain.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.List;
+
 @Getter
 @Setter
 @NoArgsConstructor
 @Entity
-@Table(name = "role")
+@Table(name = "Role")
 
 public class Role {
     @Id
@@ -20,7 +23,10 @@ public class Role {
     @Column(name = "name")
     private String name;
 
-    @ManyToOne
-    @JoinColumn(name = "user")
-    private User user;
+    @OneToMany( mappedBy = "role",
+            fetch = FetchType.LAZY,
+            cascade = CascadeType.REMOVE,
+            orphanRemoval = true)
+    @JsonIgnore
+    private List<User> users;
 }
