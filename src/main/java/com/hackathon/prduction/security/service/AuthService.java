@@ -79,7 +79,8 @@ public class AuthService {
             final Claims claims = jwtCore.extractRefreshClaims(refreshToken);
             final String username = claims.getSubject();
             final String roleName = (String) claims.get("role");
-            final Long id = (Long) claims.get("user_id");
+            Integer idInt = (Integer) claims.get("user_id");
+            final Long id = Long.valueOf(idInt);
             Role role = new Role();
             role.setName(roleName);
             User userForJwt = new User();
