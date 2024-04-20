@@ -1,8 +1,12 @@
 package com.hackathon.prduction.dto;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.hackathon.prduction.domain.models.Role;
+import com.hackathon.prduction.entity.Role;
 import com.hackathon.prduction.entity.Transaction;
+import jakarta.persistence.CascadeType;
+import jakarta.persistence.Column;
+import jakarta.persistence.FetchType;
+import jakarta.persistence.OneToMany;
 import lombok.Data;
 
 import java.util.List;
@@ -17,11 +21,11 @@ public class UserDTO {
 
     private String patronymic;
 
-    private Role role;
+    private String password;
 
-    @JsonIgnore
+    private String email;
+
     private List<Transaction> transactions;
 
-    @JsonIgnore
     private List<Role> roles;
 }

@@ -30,9 +30,11 @@ public class User {
     @Column(name = "Patronymic")
     private String patronymic;
 
-    @ManyToOne
-    @JoinColumn(name = "role")
-    private Role role;
+    @Column(name = "password")
+    private String password;
+
+    @Column(name = "email")
+    private String email;
 
     @OneToMany( mappedBy = "user",
             fetch = FetchType.LAZY,
