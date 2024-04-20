@@ -1,5 +1,6 @@
 package com.hackathon.prduction.services.impl;
 
+import com.hackathon.prduction.domain.dto.security.CreateUserRequestDTO;
 import com.hackathon.prduction.domain.entity.User;
 
 import com.hackathon.prduction.exceptions.user.UserAlreadyExistsException;
@@ -13,19 +14,7 @@ import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
-public class UserService {
+public class UserService implements com.hackathon.prduction.services.UserService {
     private final UserRepository userRepository;
-
-
-    public User create(User user) {
-
-        Optional<User> userFromDb = userRepository.findByEmail(user.getEmail());
-
-        if(userFromDb.isPresent()){
-            throw new UserAlreadyExistsException("");
-        }
-        return userRepository.save(user);
-
-    }
 
 }

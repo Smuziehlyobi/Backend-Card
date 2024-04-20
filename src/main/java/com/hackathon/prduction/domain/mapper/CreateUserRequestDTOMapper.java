@@ -12,18 +12,12 @@ public interface CreateUserRequestDTOMapper extends EntityMapper<CreateUserReque
     User toEntity(CreateUserRequestDTO createUserRequestDTO);
 
     @Override
-    default CreateUserRequestDTO toDto(User entity) {
-        return null;
-    }
+    CreateUserRequestDTO toDto(User entity);
 
     @Override
-    default List<User> toEntity(List<CreateUserRequestDTO> dtoList) {
-        return null;
-    }
+    List<User> toEntity(List<CreateUserRequestDTO> dtoList);
 
     @Override
-    default List<CreateUserRequestDTO> toDto(List<User> entityList) {
-        return null;
-    }
+    List<CreateUserRequestDTO> toDto(List<User> entityList);
 
 }
