@@ -5,7 +5,7 @@ services:
     image: postgres:14-alpine
     container_name: case-lab-db
     ports:
-      - 5432:5432
+      - "5432:5432"
     environment:
       POSTGRES_USER: ${POSTGRES_USER}
       POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
@@ -36,8 +36,8 @@ services:
       POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
       ACCESS_TOKEN: ${ACCESS_TOKEN}
       REFRESH_TOKEN: ${REFRESH_TOKEN}
-      ports:
-        - 8080:8080
+    ports:
+      - "8080:8080"
 
 networks:
   hackathon:
