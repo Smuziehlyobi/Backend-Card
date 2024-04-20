@@ -1,8 +1,9 @@
 package com.hackathon.prduction.security.service;
 
-import com.hackathon.prduction.dto.security.CreateUserRequestDTO;
-import com.hackathon.prduction.dto.security.JwtResponse;
-import com.hackathon.prduction.entity.User;
+import com.hackathon.prduction.domain.dto.security.AuthDTO;
+import com.hackathon.prduction.domain.dto.security.CreateUserRequestDTO;
+import com.hackathon.prduction.domain.dto.security.JwtResponse;
+import com.hackathon.prduction.domain.entity.User;
 import com.hackathon.prduction.exceptions.AuthException;
 import com.hackathon.prduction.security.jwt.JwtCore;
 import com.hackathon.prduction.security.service.impl.EmployeeServiceImpl;
@@ -37,13 +38,13 @@ public class AuthService {
     private final JwtCore jwtCore;
     private final AuthenticationManager authenticationManager;
     private final EmployeeServiceImpl employeeService;
-    private final EmployeeMapper employeeMapper;
+    private final UserMa
 
     public JwtResponse registration(CreateUserRequestDTO createUserRequestDTO) {
         if (!Objects.equals(createUserRequestDTO.getPassword(), createUserRequestDTO.getRepeatPassword())) {
             throw AuthException.CODE.INVALID_REPEAT_PASSWORD.get();
         }
-        User user = employeeMapper.toEntity(employeeService.save(createEmployeeRequestDTO));
+        User user =  .toEntity(employeeService.save(createEmployeeRequestDTO));
         String accessToken = jwtCore.generateAccessToken(user);
         String refreshToken = jwtCore.generateRefreshToken(user);
         return new JwtResponse(accessToken, refreshToken);
