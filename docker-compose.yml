@@ -3,7 +3,7 @@ version: "v2.21.0"
 services:
   card-service-db:
     image: postgres:14-alpine
-    container_name: case-lab-db
+    container_name: card-service-db
     ports:
       - "5432:5432"
     environment:
@@ -23,7 +23,7 @@ services:
 
   card-service:
     image: andreynachevny/card-service:latest
-    container_name: crm-service
+    container_name: card-service
     depends_on:
       card-service-db:
         condition: service_healthy
