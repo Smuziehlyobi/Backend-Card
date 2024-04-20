@@ -5,29 +5,22 @@ import com.hackathon.prduction.domain.mapper.SuggestionMapper;
 import com.hackathon.prduction.exceptions.suggestion.SuggestionNotFoundByIdException;
 import com.hackathon.prduction.repository.SuggestionRepository;
 import com.hackathon.prduction.services.SuggestionService;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
+@RequiredArgsConstructor
 public class SuggestionServiceImpl implements SuggestionService {
-    private final SuggestionService suggestionService;
     private final SuggestionRepository suggestionRepository;
     private final SuggestionMapper suggestionMapper;
 
-    @Autowired
-    public SuggestionServiceImpl(SuggestionService suggestionService, SuggestionRepository suggestionRepository, SuggestionMapper suggestionMapper) {
-        this.suggestionService = suggestionService;
-        this.suggestionRepository = suggestionRepository;
-        this.suggestionMapper = suggestionMapper;
-    }
 
     @Override
     public SuggestionDTO createSuggestion(Suggestion suggestion) {
-        SuggestionDTO suggestionDTO = suggestionMapper.toDto(suggestion);
-        suggestionRepository.save(suggestion);
-        return suggestionDTO;
+        return null;
     }
 
     @Override

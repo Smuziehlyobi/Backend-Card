@@ -17,7 +17,7 @@ import java.util.Set;
 @Setter
 @NoArgsConstructor
 @Entity
-@Table(name = "User")
+@Table(name = "users")
 
 public class User {
     @Id
@@ -49,7 +49,7 @@ public class User {
 
 
     @ManyToOne
-    @JoinColumn(name = "role")
+    @JoinColumn(name = "id_role")
     private Role role;
 
     @OnDelete(action = OnDeleteAction.CASCADE)
@@ -59,7 +59,7 @@ public class User {
             CascadeType.PERSIST,
             CascadeType.MERGE
     }, fetch = FetchType.LAZY)
-    @JoinTable(name = "User_suggestion",
+    @JoinTable(name = "user_suggestions",
             joinColumns = @JoinColumn(name = "id_user"),
             inverseJoinColumns = @JoinColumn(name = "id_suggestion")
     )
@@ -73,7 +73,7 @@ public class User {
             CascadeType.PERSIST,
             CascadeType.MERGE
     }, fetch = FetchType.LAZY)
-    @JoinTable(name = "User_event",
+    @JoinTable(name = "user_events",
             joinColumns = @JoinColumn(name = "id_user"),
             inverseJoinColumns = @JoinColumn(name = "id_event")
     )
@@ -81,6 +81,6 @@ public class User {
     private Set<Event> events = new HashSet<>();
 
     @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "card_id", referencedColumnName = "id")
+    @JoinColumn(name = "id_card", referencedColumnName = "id")
     private Card card;
 }

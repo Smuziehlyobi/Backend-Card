@@ -6,23 +6,19 @@ import com.hackathon.prduction.domain.mapper.TransactionMapper;
 import com.hackathon.prduction.exceptions.transaction.TransactionNotFoundByIdException;
 import com.hackathon.prduction.repository.TransactionRepository;
 import com.hackathon.prduction.services.TransactionService;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
+@RequiredArgsConstructor
 public class TransactionServiceImpl implements TransactionService {
-    private final TransactionService transactionService;
+
     private final TransactionRepository transactionRepository;
     private final TransactionMapper transactionMapper;
 
-    @Autowired
-    public TransactionServiceImpl(TransactionService transactionService, TransactionRepository transactionRepository, TransactionMapper transactionMapper) {
-        this.transactionService = transactionService;
-        this.transactionRepository = transactionRepository;
-        this.transactionMapper = transactionMapper;
-    }
 
     @Override
     public TransactionDTO createTransaction(Transaction transaction) {

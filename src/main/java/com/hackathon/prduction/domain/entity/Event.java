@@ -14,7 +14,7 @@ import java.util.Set;
 @Setter
 @NoArgsConstructor
 @Entity
-@Table(name = "Event")
+@Table(name = "events")
 
 public class Event {
     @Id
@@ -29,12 +29,12 @@ public class Event {
     private Timestamp timeStart;
 
     @ManyToOne
-    @JoinColumn(name = "category")
+    @JoinColumn(name = "id_category")
     private Category category;
 
     @ManyToOne
-    @JoinColumn(name = "age_category")
-    private AgeCategory ageCategoryEntity;
+    @JoinColumn(name = "id_age_category")
+    private AgeCategory ageCategory;
 
     @ManyToMany(mappedBy = "events", fetch = FetchType.LAZY,cascade = CascadeType.MERGE)
     @JsonIgnore

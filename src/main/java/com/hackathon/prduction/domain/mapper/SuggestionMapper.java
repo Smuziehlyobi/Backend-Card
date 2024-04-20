@@ -2,9 +2,11 @@ package com.hackathon.prduction.domain.mapper;
 
 import com.hackathon.prduction.domain.dto.SuggestionDTO;
 import com.hackathon.prduction.domain.entity.Suggestion;
+import org.mapstruct.Mapper;
 
 import java.util.List;
 
+@Mapper(componentModel = "spring")
 public interface SuggestionMapper extends EntityMapper<SuggestionDTO, Suggestion> {
     @Override
     Suggestion toEntity(SuggestionDTO dto);

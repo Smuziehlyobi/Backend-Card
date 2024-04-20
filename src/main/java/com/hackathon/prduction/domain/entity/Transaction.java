@@ -11,7 +11,7 @@ import java.sql.Timestamp;
 @Setter
 @NoArgsConstructor
 @Entity
-@Table(name = "Transaction")
+@Table(name = "transactions")
 
 public class Transaction {
     @Id
@@ -29,6 +29,6 @@ public class Transaction {
     private Timestamp time;
 
     @ManyToOne
-    @JoinColumn(name = "user")
+    @JoinColumn(name = "id_user")
     private User user;
 }

@@ -6,23 +6,20 @@ import com.hackathon.prduction.domain.mapper.AgeCategoryMapper;
 import com.hackathon.prduction.exceptions.agecategory.AgeCategoryNotFoundByIdException;
 import com.hackathon.prduction.repository.AgeCategoryRepository;
 import com.hackathon.prduction.services.AgeCategoryService;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
+@RequiredArgsConstructor
 public class AgeCategoryServiceImpl implements AgeCategoryService {
     private final AgeCategoryRepository ageCategoryRepository;
-    private final AgeCategoryService ageCategoryService;
+
     private final AgeCategoryMapper ageCategoryMapper;
 
-    @Autowired
-    public AgeCategoryServiceImpl(AgeCategoryRepository ageCategoryRepository, AgeCategoryService ageCategoryService, AgeCategoryMapper ageCategoryMapper) {
-        this.ageCategoryRepository = ageCategoryRepository;
-        this.ageCategoryService = ageCategoryService;
-        this.ageCategoryMapper = ageCategoryMapper;
-    }
+
     @Override
     public AgeCategoryDTO createAgeCategory(AgeCategory ageCategory) {
         AgeCategoryDTO ageCategoryDTO = ageCategoryMapper.toDto(ageCategory);

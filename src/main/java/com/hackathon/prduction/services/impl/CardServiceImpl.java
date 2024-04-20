@@ -6,23 +6,19 @@ import com.hackathon.prduction.domain.mapper.CardMapper;
 import com.hackathon.prduction.exceptions.card.CardNotFoundByIdException;
 import com.hackathon.prduction.services.CardService;
 import com.hackathon.prduction.repository.CardRepository;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import java.util.List;
 
 
 @Service
+@RequiredArgsConstructor
 public class CardServiceImpl implements CardService {
-    private final CardService cardService;
+
     private final CardRepository cardRepository;
     private final CardMapper cardMapper;
 
-    @Autowired
-    public CardServiceImpl(CardService cardService, CardRepository cardRepository, CardMapper cardMapper) {
-        this.cardService = cardService;
-        this.cardRepository = cardRepository;
-        this.cardMapper = cardMapper;
-    }
+
 
     @Override
     public CardDTO createCard(Card card) {

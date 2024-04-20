@@ -7,7 +7,6 @@ import org.mapstruct.Mapper;
 import java.util.List;
 
 @Mapper(componentModel = "spring")
-
 public interface AgeCategoryMapper extends EntityMapper<AgeCategoryDTO, AgeCategory> {
     @Override
     AgeCategory toEntity(AgeCategoryDTO dto);

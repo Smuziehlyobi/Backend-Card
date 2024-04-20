@@ -5,7 +5,7 @@
 
     <!-- Table User -->
     <changeSet id="create_table_user" author="andreynachevnyy">
-        <createTable tableName="User_db">
+        <createTable tableName="users">
             <column name="id" type="BIGINT" autoIncrement="true">
                 <constraints primaryKey="true" nullable="false"/>
             </column>
@@ -13,14 +13,16 @@
             <column name="patronymic" type="VARCHAR(255)"/>
             <column name="Last_name" type="VARCHAR(255)"/>
             <column name="id_card" type="BIGINT"/>
-            <column name="id_role" type="INTEGER"/>
+            <column name="id_role" type="BIGINT"/>
             <column name="id_transaction" type="BIGINT"/>
+            <column name="email" type="VARCHAR(30)"/>
+            <column name="password" type="VARCHAR(255)"/>
         </createTable>
     </changeSet>
 
     <!-- Table Event -->
     <changeSet id="create_table_event" author="andreynachevnyy">
-        <createTable tableName="Event">
+        <createTable tableName="events">
             <column name="id" type="BIGINT" autoIncrement="true">
                 <constraints primaryKey="true" nullable="false"/>
             </column>
@@ -32,8 +34,8 @@
     </changeSet>
 
     <!-- Table Category -->
-    <changeSet id="create_table_Category" author="andreynachevnyy">
-        <createTable tableName="Category" >
+    <changeSet id="create_table_category" author="andreynachevnyy">
+        <createTable tableName="categories" >
             <column name="id" type="BIGINT" autoIncrement="true">
                 <constraints primaryKey="true" nullable="false"/>
             </column>
@@ -42,8 +44,8 @@
     </changeSet>
 
     <!-- Table Age_Category -->
-    <changeSet id="create_table_Age_Category" author="andreynachevnyy">
-        <createTable tableName="Age_category">
+    <changeSet id="create_table_age_category" author="andreynachevnyy">
+        <createTable tableName="age_categories">
             <column name="id" type="BIGINT" autoIncrement="true">
                 <constraints primaryKey="true" nullable="false"/>
             </column>
@@ -53,7 +55,7 @@
 
     <!-- Table Card -->
     <changeSet id="create_table_card" author="andreynachevnyy">
-        <createTable tableName="Card">
+        <createTable tableName="cards">
             <column name="id" type="BIGINT" autoIncrement="true">
                 <constraints primaryKey="true" nullable="false"/>
             </column>
@@ -63,31 +65,31 @@
     </changeSet>
 
     <!-- Table Transaction -->
-    <changeSet id="create_table_Transaction" author="andreynachevnyy">
-        <createTable tableName="Transaction">
+    <changeSet id="create_table_transaction" author="andreynachevnyy">
+        <createTable tableName="transactions">
             <column name="id" type="BIGINT" autoIncrement="true">
                 <constraints primaryKey="true" nullable="false"/>
             </column>
             <column name="name" type="VARCHAR(255)"/>
             <column name="value" type="INTEGER"/>
             <column name="time" type="TIMESTAMP"/>
+            <column name="id_user" type="BIGINT"/>
         </createTable>
     </changeSet>
 
     <!-- Table Role -->
-    <changeSet id="create_table_Role" author="andreynachevnyy">
-        <createTable tableName="Role">
-            <column name="id" type="INTEGER" autoIncrement="true">
+    <changeSet id="create_table_role" author="andreynachevnyy">
+        <createTable tableName="roles">
+            <column name="id" type="BIGINT" autoIncrement="true">
                 <constraints primaryKey="true" nullable="false"/>
             </column>
             <column name="name" type="VARCHAR(255)"/>
         </createTable>
     </changeSet>
-
     <!-- Table user_event_mapping -->
     <changeSet id="create_table_user_event_mapping" author="andreynachevnyy">
-        <createTable tableName="User_event">
-            <column name="id" type="INTEGER" autoIncrement="true">
+        <createTable tableName="user_events">
+            <column name="id" type="BIGINT" autoIncrement="true">
                 <constraints primaryKey="true" nullable="false"/>
             </column>
             <column name="id_event" type="BIGINT"/>
@@ -96,12 +98,12 @@
     </changeSet>
 
     <!-- Table Suggestion -->
-    <changeSet id="create_table_Suggestion" author="andreynachevnyy">
-        <createTable tableName="Suggestion">
-            <column name="id" type="INTEGER" autoIncrement="true">
+    <changeSet id="create_table_suggestion" author="andreynachevnyy">
+        <createTable tableName="suggestions">
+            <column name="id" type="BIGINT" autoIncrement="true">
                 <constraints primaryKey="true" nullable="false"/>
             </column>
-            <column name="image" type="BLOB"/>
+            <column name="image" type="BYTEA"/>
             <column name="header" type="VARCHAR(255)"/>
             <column name="description" type="VARCHAR(255)"/>
         </createTable>
@@ -109,61 +111,69 @@
 
     <!-- Table user_suggestion_mapping -->
     <changeSet id="create_table_user_suggestion_mapping" author="andreynachevnyy">
-        <createTable tableName="User_suggestion">
-            <column name="id" type="INTEGER" autoIncrement="true">
+        <createTable tableName="user_suggestions">
+            <column name="id" type="BIGINT" autoIncrement="true">
                 <constraints primaryKey="true" nullable="false"/>
             </column>
-            <column name="id_suggestion" type="INTEGER"/>
+            <column name="id_suggestion" type="BIGINT"/>
             <column name="id_user" type="BIGINT"/>
         </createTable>
     </changeSet>
 
     <!-- Foreign Keys -->
     <changeSet id="add_foreign_keys" author="andreynachevnyy">
-        <addForeignKeyConstraint baseTableName="User_db" baseColumnNames="id_card"
-                                 constraintName="FK_user_card" referencedTableName="Card"
+        <!-- Many transactions for users -->
+        <addForeignKeyConstraint baseTableName="transactions" baseColumnNames="id_user"
+                                 constraintName="FK_transaction_user" referencedTableName="users"
                                  deferrable="false" initiallyDeferred="false"
                                  onDelete="NO ACTION" onUpdate="NO ACTION"
                                  referencedColumnNames="id" validate="true"/>
-        <addForeignKeyConstraint baseTableName="User_db" baseColumnNames="id_role"
-                                 constraintName="FK_user_role" referencedTableName="Role"
+
+        <!-- One-to-one relationship between cards and users -->
+        <addForeignKeyConstraint baseTableName="users" baseColumnNames="id_card"
+                                 constraintName="FK_user_card" referencedTableName="cards"
                                  deferrable="false" initiallyDeferred="false"
                                  onDelete="NO ACTION" onUpdate="NO ACTION"
                                  referencedColumnNames="id" validate="true"/>
-        <addForeignKeyConstraint baseTableName="User_db" baseColumnNames="id_transaction"
-                                 constraintName="FK_user_transaction" referencedTableName="Transaction"
-                                 referencedColumnNames="id" deferrable="false" initiallyDeferred="false"
-                                 onDelete="NO ACTION" onUpdate="NO ACTION" validate="true"/>
-        <addForeignKeyConstraint baseTableName="Event" baseColumnNames="id_category"
-                                 constraintName="FK_event_category" referencedTableName="Category"
+
+        <!-- Existing foreign keys remain unchanged -->
+        <addForeignKeyConstraint baseTableName="users" baseColumnNames="id_role"
+                                 constraintName="FK_user_role" referencedTableName="roles"
                                  deferrable="false" initiallyDeferred="false"
                                  onDelete="NO ACTION" onUpdate="NO ACTION"
                                  referencedColumnNames="id" validate="true"/>
-        <addForeignKeyConstraint baseTableName="Event" baseColumnNames="id_age_category"
-                                 constraintName="FK_Event_age_category" referencedTableName="Age_category"
+        <addForeignKeyConstraint baseTableName="events" baseColumnNames="id_category"
+                                 constraintName="FK_event_category" referencedTableName="categories"
                                  deferrable="false" initiallyDeferred="false"
                                  onDelete="NO ACTION" onUpdate="NO ACTION"
                                  referencedColumnNames="id" validate="true"/>
-        <addForeignKeyConstraint baseTableName="User_event" baseColumnNames="id_event"
-                                 constraintName="FK_user_event" referencedTableName="Event"
+        <addForeignKeyConstraint baseTableName="events" baseColumnNames="id_age_category"
+                                 constraintName="FK_Event_age_category" referencedTableName="age_categories"
                                  deferrable="false" initiallyDeferred="false"
                                  onDelete="NO ACTION" onUpdate="NO ACTION"
                                  referencedColumnNames="id" validate="true"/>
-        <addForeignKeyConstraint baseTableName="User_event" baseColumnNames="id_user"
-                                 constraintName="FK_user_event_User" referencedTableName="User_db"
+        <addForeignKeyConstraint baseTableName="user_events" baseColumnNames="id_event"
+                                 constraintName="FK_user_event" referencedTableName="events"
                                  deferrable="false" initiallyDeferred="false"
                                  onDelete="NO ACTION" onUpdate="NO ACTION"
                                  referencedColumnNames="id" validate="true"/>
-        <addForeignKeyConstraint baseTableName="User_suggestion" baseColumnNames="id_suggestion"
-                                 constraintName="FK_user_suggestion" referencedTableName="Suggestion"
+        <addForeignKeyConstraint baseTableName="user_events" baseColumnNames="id_user"
+                                 constraintName="FK_user_event_User" referencedTableName="users"
                                  deferrable="false" initiallyDeferred="false"
                                  onDelete="NO ACTION" onUpdate="NO ACTION"
                                  referencedColumnNames="id" validate="true"/>
-        <addForeignKeyConstraint baseTableName="User_suggestion" baseColumnNames="id_user"
-                                 constraintName="FK_user_suggestion_User" referencedTableName="User_db"
+        <addForeignKeyConstraint baseTableName="user_suggestions" baseColumnNames="id_suggestion"
+                                 constraintName="FK_user_suggestion" referencedTableName="suggestions"
+                                 deferrable="false" initiallyDeferred="false"
+                                 onDelete="NO ACTION" onUpdate="NO ACTION"
+                                 referencedColumnNames="id" validate="true"/>
+        <addForeignKeyConstraint baseTableName="user_suggestions" baseColumnNames="id_user"
+                                 constraintName="FK_user_suggestion_User" referencedTableName="users"
                                  deferrable="false" initiallyDeferred="false"
                                  onDelete="NO ACTION" onUpdate="NO ACTION"
                                  referencedColumnNames="id" validate="true"/>
     </changeSet>
 
+
 </databaseChangeLog>
+

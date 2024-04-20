@@ -12,7 +12,7 @@ import java.util.List;
 @Setter
 @NoArgsConstructor
 @Entity
-@Table(name = "Age_category")
+@Table(name = "age_categories")
 
 public class AgeCategory {
     @Id
@@ -23,7 +23,7 @@ public class AgeCategory {
     @Column(name = "name")
     private String name;
 
-    @OneToMany( mappedBy = "category",
+    @OneToMany( mappedBy = "ageCategory",
             fetch = FetchType.LAZY,
             cascade = CascadeType.REMOVE,
             orphanRemoval = true)

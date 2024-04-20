@@ -9,7 +9,7 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @Entity
-@Table(name = "Card")
+@Table(name = "cards")
 public class Card {
     @Id
     @Column(name = "id")

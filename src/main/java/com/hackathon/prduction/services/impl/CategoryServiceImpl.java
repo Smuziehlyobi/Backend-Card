@@ -4,30 +4,20 @@ import com.hackathon.prduction.domain.dto.CategoryDTO;
 import com.hackathon.prduction.domain.mapper.CategoryMapper;
 import com.hackathon.prduction.domain.entity.Category;
 import com.hackathon.prduction.exceptions.category.CategoryNotFoundByIdException;
-import com.hackathon.prduction.exceptions.transaction.TransactionNotFoundByIdException;
 import com.hackathon.prduction.repository.CategoryRepository;
 import com.hackathon.prduction.services.CategoryService;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
+@RequiredArgsConstructor
 public class CategoryServiceImpl implements CategoryService {
 
-    private final CategoryService categoryService;
     private final CategoryRepository categoryRepo;
+
     private final CategoryMapper categoryMapper;
-
-    @Autowired
-    public CategoryServiceImpl(CategoryService categoryService,
-                               CategoryRepository categoryRepo,
-                               CategoryMapper categoryMapper) {
-        this.categoryService = categoryService;
-        this.categoryRepo = categoryRepo;
-        this.categoryMapper = categoryMapper;
-    }
-
 
     @Override
     public CategoryDTO createCategory(Category category) {
