@@ -28,7 +28,7 @@ public class UserServiceImpl {
     @Transactional
     public User save(CreateUserRequestDTO userResponseDTO) {
         User user = createUserRequestDTOMapper.toEntity(userResponseDTO);
-        Role role = roleRepository.findByName("USER").orElse(null);
+        Role role = roleRepository.findByName("ROLE_USER").orElse(null);
         if(role == null){
             throw new RoleNotFoundException("Role not found");
         }
