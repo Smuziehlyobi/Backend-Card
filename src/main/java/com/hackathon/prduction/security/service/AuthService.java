@@ -5,7 +5,6 @@ import com.hackathon.prduction.domain.dto.security.CreateUserRequestDTO;
 import com.hackathon.prduction.domain.dto.security.JwtResponse;
 import com.hackathon.prduction.domain.entity.Role;
 import com.hackathon.prduction.domain.entity.User;
-import com.hackathon.prduction.domain.mapper.UserMapper;
 import com.hackathon.prduction.exceptions.AuthException;
 import com.hackathon.prduction.security.jwt.JwtCore;
 import com.hackathon.prduction.security.service.impl.UserServiceImpl;
@@ -16,8 +15,6 @@ import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.stereotype.Component;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Objects;
 
 /**

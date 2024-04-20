@@ -1,8 +1,10 @@
 package com.hackathon.prduction.services.impl;
 
-import com.hackathon.prduction.domain.dto.CardDTO;
+import com.hackathon.prduction.domain.dto.card.CardRequestDTO;
+import com.hackathon.prduction.domain.dto.card.CardResponseDTO;
 import com.hackathon.prduction.domain.entity.Card;
-import com.hackathon.prduction.domain.mapper.CardMapper;
+import com.hackathon.prduction.domain.mapper.card.CardRequestMapper;
+import com.hackathon.prduction.domain.mapper.card.CardResponseMapper;
 import com.hackathon.prduction.exceptions.card.CardNotFoundByIdException;
 import com.hackathon.prduction.services.CardService;
 import com.hackathon.prduction.repository.CardRepository;
@@ -16,15 +18,15 @@ import java.util.List;
 public class CardServiceImpl implements CardService {
 
     private final CardRepository cardRepository;
-    private final CardMapper cardMapper;
+    private final CardRequestMapper cardRequestMapper;
+    private final CardResponseMapper cardResponseMapper;
 
 
 
     @Override
-    public CardDTO createCard(Card card) {
-        CardDTO cardDTO = cardMapper.toDto(card);
-        cardRepository.save(card);
-        return cardDTO;
+    public CardResponseDTO createCard(CardRequestDTO cardDTO) {
+        Card card = cardRequestMapper.toEntity(cardDTO);
+        return cardResponseMapper.toDto(cardRepository.save(card));
     }
 
     @Override
@@ -37,20 +39,19 @@ public class CardServiceImpl implements CardService {
     }
 
     @Override
-    public List<CardDTO> getAllCards() {
+    public List<CardResponseDTO> getAllCards() {
         List<Card> cards = cardRepository.findAll();
-        List<CardDTO> cardDTOs = cardMapper.toDto(cards);
-        return cardDTOs;
+        return cardResponseMapper.toDto(cards);
     }
 
     @Override
-    public CardDTO getOneCard(Long cardId) throws CardNotFoundByIdException {
+    public CardResponseDTO getOneCard(Long cardId) throws CardNotFoundByIdException {
         Card card = cardRepository.findById(cardId).orElse(null);
         if (card == null) {
             throw new CardNotFoundByIdException("Card with such ID does not exist.");
         }
-        CardDTO cardDTO = cardMapper.toDto(card);
-        return cardDTO;
+        CardResponseDTO cardResponseDTO = cardResponseMapper.toDto(card);
+        return cardResponseDTO;
     }
 
 }

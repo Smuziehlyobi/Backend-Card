@@ -1,12 +1,11 @@
 package com.hackathon.prduction.services.impl;
-import com.hackathon.prduction.domain.dto.SuggestionDTO;
+import com.hackathon.prduction.domain.dto.suggestion.SuggestionRequestDTO;
 import com.hackathon.prduction.domain.entity.Suggestion;
-import com.hackathon.prduction.domain.mapper.SuggestionMapper;
+import com.hackathon.prduction.domain.mapper.suggestion.SuggestionMapper;
 import com.hackathon.prduction.exceptions.suggestion.SuggestionNotFoundByIdException;
 import com.hackathon.prduction.repository.SuggestionRepository;
 import com.hackathon.prduction.services.SuggestionService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -19,7 +18,7 @@ public class SuggestionServiceImpl implements SuggestionService {
 
 
     @Override
-    public SuggestionDTO createSuggestion(Suggestion suggestion) {
+    public SuggestionRequestDTO createSuggestion(Suggestion suggestion) {
         return null;
     }
 
@@ -33,20 +32,20 @@ public class SuggestionServiceImpl implements SuggestionService {
     }
 
     @Override
-    public List<SuggestionDTO> getAllSuggestions() {
+    public List<SuggestionRequestDTO> getAllSuggestions() {
         List<Suggestion> suggestions = suggestionRepository.findAll();
-        List<SuggestionDTO> suggestionDTOs = suggestionMapper.toDto(suggestions);
-        return suggestionDTOs;
+        List<SuggestionRequestDTO> suggestionRequestDTOS = suggestionMapper.toDto(suggestions);
+        return suggestionRequestDTOS;
     }
 
     @Override
-    public SuggestionDTO getOneSuggestion(Long suggestionId) throws SuggestionNotFoundByIdException {
+    public SuggestionRequestDTO getOneSuggestion(Long suggestionId) throws SuggestionNotFoundByIdException {
         Suggestion suggestion = suggestionRepository.findById(suggestionId).orElse(null);
         if (suggestion == null) {
             throw new SuggestionNotFoundByIdException("Suggestion with such ID does not exist.");
         }
-        SuggestionDTO suggestionDTO = suggestionMapper.toDto(suggestion);
-        return suggestionDTO;
+        SuggestionRequestDTO suggestionRequestDTO = suggestionMapper.toDto(suggestion);
+        return suggestionRequestDTO;
     }
 }
 
