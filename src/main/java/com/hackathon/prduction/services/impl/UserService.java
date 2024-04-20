@@ -1,7 +1,6 @@
 package com.hackathon.prduction.services.impl;
 
-import com.hackathon.prduction.domain.models.Role;
-import com.hackathon.prduction.domain.models.User;
+import com.hackathon.prduction.domain.entity.User;
 import com.hackathon.prduction.exceptions.InvalidRegistrationException;
 import com.hackathon.prduction.repository.UserRepository;
 import lombok.RequiredArgsConstructor;

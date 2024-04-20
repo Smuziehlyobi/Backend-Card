@@ -1,6 +1,6 @@
 package com.hackathon.prduction.security.service.impl;
 
-import com.hackathon.prduction.entity.User;
+import com.hackathon.prduction.domain.entity.User;
 import com.hackathon.prduction.exceptions.AuthException;
 import com.hackathon.prduction.repository.UserRepository;
 import lombok.RequiredArgsConstructor;

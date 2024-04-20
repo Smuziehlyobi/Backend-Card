@@ -3,10 +3,13 @@ package com.hackathon.prduction.security.service;
 import com.hackathon.prduction.domain.dto.security.AuthDTO;
 import com.hackathon.prduction.domain.dto.security.CreateUserRequestDTO;
 import com.hackathon.prduction.domain.dto.security.JwtResponse;
+import com.hackathon.prduction.domain.entity.Role;
 import com.hackathon.prduction.domain.entity.User;
+import com.hackathon.prduction.domain.mapper.UserMapper;
 import com.hackathon.prduction.exceptions.AuthException;
 import com.hackathon.prduction.security.jwt.JwtCore;
 import com.hackathon.prduction.security.service.impl.EmployeeServiceImpl;
+import com.hackathon.prduction.security.service.impl.UserServiceImpl;
 import io.jsonwebtoken.Claims;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -14,6 +17,8 @@ import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.stereotype.Component;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 /**
@@ -37,14 +42,14 @@ public class AuthService {
 
     private final JwtCore jwtCore;
     private final AuthenticationManager authenticationManager;
-    private final EmployeeServiceImpl employeeService;
-    private final UserMa
+    private final UserServiceImpl userService;
+    private final UserMapper userMapper;
 
     public JwtResponse registration(CreateUserRequestDTO createUserRequestDTO) {
         if (!Objects.equals(createUserRequestDTO.getPassword(), createUserRequestDTO.getRepeatPassword())) {
             throw AuthException.CODE.INVALID_REPEAT_PASSWORD.get();
         }
-        User user =  .toEntity(employeeService.save(createEmployeeRequestDTO));
+        User user = userService.save(createUserRequestDTO);
         String accessToken = jwtCore.generateAccessToken(user);
         String refreshToken = jwtCore.generateRefreshToken(user);
         return new JwtResponse(accessToken, refreshToken);
@@ -58,11 +63,11 @@ public class AuthService {
         } catch (BadCredentialsException e) {
             throw AuthException.CODE.NO_SUCH_USERNAME_OR_PWD.get();
         }
-        final Employee employee = employeeService
-                .findOne(authDto.getUsername())
+        final User user = userService
+                .findByEmail(authDto.getUsername())
                 .orElseThrow(AuthException.CODE.NO_SUCH_USERNAME_OR_PWD::get);
-        final String accessToken = jwtCore.generateAccessToken(employee);
-        final String refreshToken = jwtCore.generateRefreshToken(employee);
+        final String accessToken = jwtCore.generateAccessToken(user);
+        final String refreshToken = jwtCore.generateRefreshToken(user);
         return new JwtResponse(accessToken, refreshToken);
     }
 
@@ -79,17 +84,18 @@ public class AuthService {
             final Claims claims = jwtCore.extractRefreshClaims(refreshToken);
             final String username = claims.getSubject();
             final String roleName = (String) claims.get("role");
-            final Integer id = (Integer) claims.get("employee_id");
-            employeeService.findOne(Long.valueOf(id));
+            final Long id = (Long) claims.get("user_id");
             Role role = new Role();
             role.setName(roleName);
-            Employee employeeForJwt = new Employee();
-            employeeForJwt.setUsername(username);
-            employeeForJwt.setRole(role);
-            employeeForJwt.setId(Long.valueOf(id));
-            final String accessToken = jwtCore.generateAccessToken(employeeForJwt);
+            List<Role> roles = new ArrayList<>();
+            roles.add(role);
+            User userForJwt = new User();
+            userForJwt.setEmail(username);
+            userForJwt.setRoles(roles);
+            userForJwt.setId(Long.valueOf(id));
+            final String accessToken = jwtCore.generateAccessToken(userForJwt);
             if (action.equals("refresh")) {
-                final String newRefreshToken = jwtCore.generateRefreshToken(employeeForJwt);
+                final String newRefreshToken = jwtCore.generateRefreshToken(userForJwt);
                 return new JwtResponse(accessToken, newRefreshToken);
             } else {
                 return new JwtResponse(accessToken, null);

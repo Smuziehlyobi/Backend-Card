@@ -1,6 +1,6 @@
 package com.hackathon.prduction.security.jwt;
 
-import com.hackathon.prduction.entity.User;
+import com.hackathon.prduction.domain.entity.User;
 import io.jsonwebtoken.*;
 import io.jsonwebtoken.io.Decoders;
 import io.jsonwebtoken.security.Keys;
@@ -51,7 +51,7 @@ public class JwtCore {
                 .setSubject(user.getEmail())
                 .setIssuedAt(new Date(System.currentTimeMillis()))
                 .setExpiration(accessExpiration)
-                .claim("employee_id",user.getId())
+                .claim("user_id",user.getId())
                 .claim("role", user.getRoles().get(0).getName())
                 .signWith(accessKey, SignatureAlgorithm.HS256)
                 .compact();

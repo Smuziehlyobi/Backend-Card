@@ -1,0 +1,46 @@
+version: "v2.21.0"
+
+services:
+  case-lab-db:
+    image: postgres:14-alpine
+    container_name: case-lab-db
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      POSTGRES_DB: ${DB_NAME}
+      PGDATA: "/var/lib/postgresql/data"
+      POSTGRES_INITDB_ARGS: '--data-checksums --username=${POSTGRES_USER} --pwfile=<(echo "${POSTGRES_PASSWORD}")'
+    restart: always
+    networks:
+      - hackathon
+    healthcheck:
+      test: [ "CMD", "pg_isready","--dbname=$NAME","--username=$POSTGRES_USER" ]
+      interval: 30s
+      timeout: 5s
+      retries: 7
+
+  card-service:
+    image: andreynachevny/card-service:latest
+    container_name: crm-service
+    depends_on:
+      case-lab-db:
+        condition: service_healthy
+      minio:
+        condition: service_started
+      networks:
+        - hackathon
+    environment:
+      DB_NAME: ${DB_NAME}
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_IP: ${POSTGRES_IP}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      ACCESS_TOKEN: ${ACCESS_TOKEN}
+      REFRESH_TOKEN: ${REFRESH_TOKEN}
+      ports:
+        - "8080:8080"
+
+networks:
+  hackathon:
+    driver: bridge

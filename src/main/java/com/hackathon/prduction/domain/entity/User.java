@@ -48,5 +48,5 @@ public class User {
             cascade = CascadeType.REMOVE,
             orphanRemoval = true)
     @JsonIgnore
-    private List<Role> roles;
+        private List<Role> roles;
 }
