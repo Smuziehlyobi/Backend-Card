@@ -1,21 +1,17 @@
 package com.hackathon.prduction.security.service;
 
-import com.hackathon.prduction.domain.dto.card.CardRequestDTO;
 import com.hackathon.prduction.domain.dto.security.AuthDTO;
 import com.hackathon.prduction.domain.dto.security.CreateUserRequestDTO;
 import com.hackathon.prduction.domain.dto.security.JwtResponse;
 import com.hackathon.prduction.domain.dto.security.JwtWithCardResponseDTO;
-import com.hackathon.prduction.domain.entity.Card;
 import com.hackathon.prduction.domain.entity.Role;
 import com.hackathon.prduction.domain.entity.User;
 import com.hackathon.prduction.exceptions.AuthException;
-import com.hackathon.prduction.exceptions.card.CardNotCreatedException;
 import com.hackathon.prduction.security.jwt.JwtCore;
 import com.hackathon.prduction.security.service.impl.UserServiceImpl;
 import com.hackathon.prduction.services.CardService;
 import io.jsonwebtoken.Claims;
 import lombok.RequiredArgsConstructor;
-import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -23,20 +19,6 @@ import org.springframework.stereotype.Component;
 
 import java.util.Objects;
 
-/**
- * AuthService является компонентом Spring и использует другие компоненты, такие как JwtCore и AuthenticationManager.
- *
- * <p>Регистрация: Метод registration принимает объект EmployeeDTO и создает нового сотрудника с помощью
- * EmployeeServiceImpl. Затем генерируются токены доступа и обновления с помощью jwtCore, ивозвращается объект
- * JwtResponse, содержащий эти токены.
- *
- * <p>Вход: Метод login принимает объект AuthDto, содержащий имя пользователя и пароль. AuthenticationManager пытается
- * аутентифицировать пользователя, и в случае успешного входа генерируются токены доступа и обновления, как и при
- * регистрации. Затем возвращается объект JwtResponse с токенами.
- *
- * @author Андрей Начевный
- * @version 1.0
- */
 
 @Component
 @RequiredArgsConstructor
