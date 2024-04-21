@@ -12,12 +12,10 @@ import java.sql.Timestamp;
 @NoArgsConstructor
 @Data
 public class TransactionResponseDTO {
-    private Long id;
+
     private String name;
 
     private Integer value;
 
     private Timestamp time;
-
-    private User user;
 }

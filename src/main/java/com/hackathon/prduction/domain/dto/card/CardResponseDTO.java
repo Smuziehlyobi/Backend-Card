@@ -9,6 +9,8 @@ import lombok.*;
 @NoArgsConstructor
 @Data
 public class CardResponseDTO {
+    private Long id;
+
     private String value;
 
     private Long balance;

@@ -43,7 +43,7 @@ public class AuthService {
         String accessToken = jwtCore.generateAccessToken(user);
         String refreshToken = jwtCore.generateRefreshToken(user);
 
-        return new JwtWithCardResponseDTO(accessToken, refreshToken, user.getCard().getValue(), user.getCard().getBalance(),
+        return new JwtWithCardResponseDTO(accessToken, refreshToken, user.getCard().getId(), user.getCard().getValue(), user.getCard().getBalance(),
                 user.getFirstName(), user.getLastName(), user.getPatronymic());
     }
 
