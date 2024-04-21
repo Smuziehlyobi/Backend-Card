@@ -1,8 +1,7 @@
 package com.hackathon.prduction.controller;
 
 import com.hackathon.prduction.domain.dto.event.EventRequestDTO;
-import com.hackathon.prduction.domain.entity.Event;
-import com.hackathon.prduction.services.EventService;
+import com.hackathon.prduction.domain.dto.event.EventResponseDTO;
 import com.hackathon.prduction.services.impl.EventServiceImpl;
 import com.hackathon.prduction.services.impl.UserEventServiceImpl;
 import lombok.RequiredArgsConstructor;
@@ -19,7 +18,7 @@ public class EventController {
 
     private final UserEventServiceImpl userEventService;
 
-    private final EventService eventService;
+    private final EventServiceImpl eventService;
 
     @PostMapping("/reg")
     public ResponseEntity<?> registrationToEvent(@RequestBody EventRequestDTO eventRequestDTO){
@@ -30,5 +29,11 @@ public class EventController {
         @GetMapping("/all")
     public ResponseEntity<?> showAll(){
         return ResponseEntity.ok().body(eventService.findAll());
+    }
+
+    @GetMapping("/myevents")
+    public ResponseEntity<?> showMyEvents(){
+       List<EventResponseDTO> response = eventService.findOwnEvent();
+        return ResponseEntity.ok().body(response);
     }
 }

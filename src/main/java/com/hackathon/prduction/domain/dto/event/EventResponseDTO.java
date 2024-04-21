@@ -2,11 +2,9 @@ package com.hackathon.prduction.domain.dto.event;
 
 import com.hackathon.prduction.domain.entity.AgeCategory;
 import com.hackathon.prduction.domain.entity.Category;
-import com.hackathon.prduction.domain.entity.Event;
 import lombok.*;
 
 import java.sql.Timestamp;
-import java.util.List;
 
 @Getter
 @Setter
@@ -25,5 +23,4 @@ public class EventResponseDTO {
 
     private AgeCategory ageCategory;
 
-    private List<Event> eventList;
 }
