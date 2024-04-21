@@ -29,6 +29,5 @@ public class Suggestion {
     private String description;
 
     @ManyToMany(mappedBy = "suggestions", fetch = FetchType.LAZY,cascade = CascadeType.MERGE)
-    @JsonIgnore
     private Set<User> users = new HashSet<>();
 }

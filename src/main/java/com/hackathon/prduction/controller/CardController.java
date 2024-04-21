@@ -32,13 +32,11 @@ public class CardController {
     private final UserServiceImpl userService;
 
     @GetMapping("/show")
-//    @PreAuthorize("hasRole('ROLE_USER')")
     public ResponseEntity<?> showCard(){
         try {
             UsernamePasswordAuthenticationToken details = (UsernamePasswordAuthenticationToken) SecurityContextHolder.getContext().getAuthentication();
             UserDetails userDetails = (UserDetails) details.getPrincipal();
             String username = userDetails.getUsername();
-//            String username = details.getUsername();
             User user = userService.findByEmail(username).orElse(null);
             Card card = cardService.findByUser(user);
             CardResponseDTO cardResponseDTO = new CardResponseDTO(card.getValue(), card.getBalance(), user.getFirstName(),

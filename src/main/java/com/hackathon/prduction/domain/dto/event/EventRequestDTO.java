@@ -13,11 +13,6 @@ import java.sql.Timestamp;
 @NoArgsConstructor
 @Data
 public class EventRequestDTO {
-    private String name;
+    private Long id;
 
-    private Timestamp timeStart;
-
-    private Long categoryId;
-
-    private Long ageCategoryId;
 }
