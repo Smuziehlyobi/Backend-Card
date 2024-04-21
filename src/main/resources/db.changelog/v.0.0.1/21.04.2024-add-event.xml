@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                   https://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd">
+
+    <changeSet id="insert_categories" author="your_author_name">
+        <sql>INSERT INTO categories (name) VALUES ('Лекции'), ('Здороовье'), ('Собрание');</sql>
+    </changeSet>
+
+    <!-- Insert Age Categories -->
+    <changeSet id="insert_age_categories" author="your_author_name">
+        <sql>INSERT INTO age_categories (name) VALUES ('Студенты'), ('Подростки'), ('Взрослые'), ('Пожилые');</sql>
+    </changeSet>
+
+    <!-- Insert Events -->
+    <changeSet id="insert_events" author="your_author_name">
+        <sql>INSERT INTO events (name, time_start, id_category, id_age_category)
+             VALUES
+                 ('Интересные факты о космосе', CURRENT_DATE + INTERVAL '3 day', 1, 1),
+                 ('История и развитие робототехники', CURRENT_DATE + INTERVAL '6 day', 1, 1),
+                 ('Тайны древних цивилизаций', CURRENT_DATE + INTERVAL '7 day', 1, 1),
+                 ('Искусственный интеллект: преимущества и угрозы', CURRENT_DATE + INTERVAL '18 day', 1, 1),
+                 ('Будущее генетики: открытия и перспективы', CURRENT_DATE + INTERVAL '21 day', 1, 1),
+                 ('История искусства: ключевые эпохи и художники', CURRENT_DATE + INTERVAL '14 day', 1, 1),
+                 ('Как правильно планировать свое время', CURRENT_DATE + INTERVAL '4 day', 1, 1),
+                 ('Экология городской среды: проблемы и решения', CURRENT_DATE + INTERVAL '4 day', 1, 1),
+                 ('Технологии будущего: взгляд изнутри', CURRENT_DATE + INTERVAL '3 day', 1, 1),
+                 ('Финансовая грамотность: секреты успешного инвестирования', CURRENT_DATE + INTERVAL '1 day', 1, 1),
+                 ('Питание и здоровье: правильный выбор', CURRENT_DATE + INTERVAL '1 day', 2, 2),
+                 ('Медитация и психическое здоровье', CURRENT_DATE + INTERVAL '3 day', 2, 2),
+                 ('Спорт и физическая активность: ключи к здоровью', CURRENT_DATE + INTERVAL '6 day', 2, 2),
+                 ('Профилактика заболеваний: важные аспекты', CURRENT_DATE + INTERVAL '7 day', 2, 2),
+                 ('Йога и ее польза для организма', CURRENT_DATE + INTERVAL '4 day', 2, 2),
+                 ('Здоровый сон: правила и рекомендации', CURRENT_DATE + INTERVAL '1 day', 2, 2),
+                 ('Психология счастливой жизни', CURRENT_DATE + INTERVAL '5 day', 2, 2),
+                 ('Уход за психическим здоровьем в стрессовых ситуациях', CURRENT_DATE + INTERVAL '1 day', 2, 2),
+                 ('Балансирование работы и личной жизни: как сохранить здоровье', CURRENT_DATE + INTERVAL '1 day', 2, 2),
+                 ('Эффективные методы релаксации', CURRENT_DATE + INTERVAL '14 day', 2, 2),
+                 ('Обсуждение текущих задач и планов на ближайшее будущее', CURRENT_DATE + INTERVAL '12 day', 3, 3),
+                 ('Встреча с руководством: обсуждение стратегии развития компании', CURRENT_DATE + INTERVAL '1 day', 3, 3),
+                 ('Праздничное мероприятие в честь дня рождения компании', CURRENT_DATE + INTERVAL '9 day', 3, 3),
+                 ('Информационное собрание: важные новости и объявления', CURRENT_DATE + INTERVAL '10 day', 3, 3),
+                 ('Совещание по поводу текущих проектов и их реализации', CURRENT_DATE + INTERVAL '18 day', 3, 3),
+                 ('Обучающее мероприятие для сотрудников', CURRENT_DATE + INTERVAL '26 day', 3, 3),
+                 ('Встреча с клиентами: обсуждение результатов и планов на будущее', CURRENT_DATE + INTERVAL '8 day', 3, 3),
+                 ('Командообразующее мероприятие для укрепления отношений в коллективе', CURRENT_DATE + INTERVAL '21 day', 3, 3),
+                 ('Семинар по повышению квалификации сотрудников', CURRENT_DATE + INTERVAL '22 day', 3, 3),
+                 ('Брифинг по текущим вопросам и проблемам', CURRENT_DATE + INTERVAL '23 day', 3, 3);
+        </sql>
+
+    </changeSet>
+</databaseChangeLog>
