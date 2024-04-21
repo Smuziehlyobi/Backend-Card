@@ -4,6 +4,8 @@ import com.hackathon.prduction.domain.dto.card.PaymentRequestDTO;
 import com.hackathon.prduction.domain.dto.card.CardResponseDTO;
 import com.hackathon.prduction.domain.entity.Card;
 import com.hackathon.prduction.domain.entity.User;
+import com.hackathon.prduction.exceptions.ErrorResponse;
+import com.hackathon.prduction.exceptions.card.InsufficientFundsException;
 import com.hackathon.prduction.security.service.impl.UserServiceImpl;
 import com.hackathon.prduction.services.CardService;
 import lombok.RequiredArgsConstructor;
@@ -48,5 +50,14 @@ public class CardController {
     public ResponseEntity<?> writingFromCard(@RequestBody PaymentRequestDTO paymentRequestDTO) {
         cardService.executePayment(paymentRequestDTO);
         return ResponseEntity.status(HttpStatus.ACCEPTED).body("Оплата прошла успешно");
+    }
+
+    @ExceptionHandler
+    private ResponseEntity<ErrorResponse> handInsufficientFunds(InsufficientFundsException insufficientFundsException) {
+         com.hackathon.prduction.exceptions.ErrorResponse response = new com.hackathon.prduction.exceptions.ErrorResponse(
+                insufficientFundsException.getMessage(),
+                System.currentTimeMillis()
+        );
+        return new ResponseEntity<>(response, HttpStatus.NOT_FOUND);
     }
 }

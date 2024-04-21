@@ -9,6 +9,7 @@ import com.hackathon.prduction.domain.entity.User;
 import com.hackathon.prduction.domain.mapper.card.CardRequestMapper;
 import com.hackathon.prduction.domain.mapper.card.CardResponseMapper;
 import com.hackathon.prduction.exceptions.card.CardNotFoundByIdException;
+import com.hackathon.prduction.exceptions.card.InsufficientFundsException;
 import com.hackathon.prduction.services.CardService;
 import com.hackathon.prduction.repository.CardRepository;
 import jakarta.transaction.Transactional;
@@ -86,6 +87,9 @@ public class CardServiceImpl implements CardService {
     @Transactional
     public void executePayment(PaymentRequestDTO paymentRequestDTO) {
         Card card = cardRepository.getCardById(paymentRequestDTO.getId()).orElseThrow(() -> new CardNotFoundByIdException("Такой карты не существует"));
+        if(card.getBalance() <= 0 || paymentRequestDTO.getValue() > card.getBalance()){
+            throw new InsufficientFundsException("Недостаточно средств");
+        }
         Long balance = card.getBalance();
         balance = (balance - paymentRequestDTO.getValue());
         Transaction transaction = new Transaction();
