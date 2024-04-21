@@ -10,6 +10,7 @@ import com.hackathon.prduction.domain.mapper.card.CardRequestMapper;
 import com.hackathon.prduction.domain.mapper.card.CardResponseMapper;
 import com.hackathon.prduction.exceptions.card.CardNotFoundByIdException;
 import com.hackathon.prduction.exceptions.card.InsufficientFundsException;
+import com.hackathon.prduction.repository.UserRepository;
 import com.hackathon.prduction.security.service.impl.UserServiceImpl;
 import com.hackathon.prduction.services.CardService;
 import com.hackathon.prduction.repository.CardRepository;
@@ -38,7 +39,7 @@ public class CardServiceImpl implements CardService {
     private final CardRequestMapper cardRequestMapper;
     private final CardResponseMapper cardResponseMapper;
     private final TransactionServiceImpl transactionService;
-    private final UserServiceImpl userService;
+    private final UserRepository userRepository;
 
 
     @Override
@@ -94,7 +95,7 @@ public class CardServiceImpl implements CardService {
         UsernamePasswordAuthenticationToken details = (UsernamePasswordAuthenticationToken) SecurityContextHolder.getContext().getAuthentication();
         UserDetails userDetails = (UserDetails) details.getPrincipal();
         String username = userDetails.getUsername();
-        User user = userService.findByEmail(username).orElse(null);
+        User user = userRepository.findByEmail(username).orElse(null);
         Card card = user.getCard();
 
         if(card.getBalance() <= 0 || paymentRequestDTO.getValue() > card.getBalance()){
