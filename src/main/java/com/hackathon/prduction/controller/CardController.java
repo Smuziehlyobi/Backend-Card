@@ -37,8 +37,8 @@ public class CardController {
             String username = userDetails.getUsername();
             User user = userService.findByEmail(username).orElse(null);
             Card card = cardService.findByUser(user);
-            CardResponseDTO cardResponseDTO = new CardResponseDTO(card.getValue(), card.getBalance(), user.getFirstName(),
-                    user.getLastName(), user.getPatronymic());
+            CardResponseDTO cardResponseDTO = new CardResponseDTO(card.getId(), card.getValue(), card.getBalance(),
+                    user.getFirstName(), user.getLastName(), user.getPatronymic());
             return ResponseEntity.ok().body(cardResponseDTO);
         }catch (Exception e){
             return ResponseEntity.badRequest().body(e.getMessage());

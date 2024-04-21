@@ -1,8 +1,11 @@
 package com.hackathon.prduction.services.impl;
 
 import com.hackathon.prduction.domain.dto.transaction.TransactionRequestDTO;
+import com.hackathon.prduction.domain.dto.transaction.TransactionResponseDTO;
 import com.hackathon.prduction.domain.entity.Transaction;
+import com.hackathon.prduction.domain.entity.User;
 import com.hackathon.prduction.domain.mapper.transaction.TransactionMapper;
+import com.hackathon.prduction.domain.mapper.transaction.TransactionResponseMapper;
 import com.hackathon.prduction.exceptions.transaction.TransactionNotFoundByIdException;
 import com.hackathon.prduction.repository.TransactionRepository;
 import com.hackathon.prduction.services.TransactionService;
@@ -17,6 +20,7 @@ public class TransactionServiceImpl implements TransactionService {
 
     private final TransactionRepository transactionRepository;
     private final TransactionMapper transactionMapper;
+    private final TransactionResponseMapper transactionResponseMapper;
 
 
     @Override
@@ -36,11 +40,19 @@ public class TransactionServiceImpl implements TransactionService {
     }
 
     @Override
-    public List<TransactionRequestDTO> getAllTransactions() {
+    public List<TransactionResponseDTO> getAllTransactions() {
         List<Transaction> transactions = transactionRepository.findAll();
-        List<TransactionRequestDTO> transactionRequestDTOS = transactionMapper.toDto(transactions);
-        return transactionRequestDTOS;
+        List<TransactionResponseDTO> transactionResponseDTOList = transactionResponseMapper.toDto(transactions);
+        return transactionResponseDTOList;
     }
+
+    @Override
+    public List<TransactionResponseDTO> getAllTransactionsByUser(User user) {
+        List<Transaction> transactions = transactionRepository.findAllByUser(user);
+        List<TransactionResponseDTO> transactionResponseDTOList = transactionResponseMapper.toDto(transactions);
+        return transactionResponseDTOList;
+    }
+
 
     @Override
     public TransactionRequestDTO getOneTransaction(Long transactionId) throws TransactionNotFoundByIdException {
