@@ -60,6 +60,4 @@ public class CardController {
         );
         return new ResponseEntity<>(response, HttpStatus.NOT_FOUND);
     }
-
-
 }
