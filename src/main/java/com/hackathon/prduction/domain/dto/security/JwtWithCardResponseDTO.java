@@ -14,9 +14,6 @@ public class JwtWithCardResponseDTO {
 
     private String refreshToken;
 
-    //card id
-    private Long id;
-
     private String value;
 
     private Long balance;
