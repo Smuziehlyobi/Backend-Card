@@ -10,11 +10,16 @@ import com.hackathon.prduction.domain.mapper.card.CardRequestMapper;
 import com.hackathon.prduction.domain.mapper.card.CardResponseMapper;
 import com.hackathon.prduction.exceptions.card.CardNotFoundByIdException;
 import com.hackathon.prduction.exceptions.card.InsufficientFundsException;
+import com.hackathon.prduction.repository.UserRepository;
+import com.hackathon.prduction.security.service.impl.UserServiceImpl;
 import com.hackathon.prduction.services.CardService;
 import com.hackathon.prduction.repository.CardRepository;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.crossstore.ChangeSetPersister;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 
 import java.beans.Transient;
@@ -34,6 +39,7 @@ public class CardServiceImpl implements CardService {
     private final CardRequestMapper cardRequestMapper;
     private final CardResponseMapper cardResponseMapper;
     private final TransactionServiceImpl transactionService;
+    private final UserRepository userRepository;
 
 
     @Override
@@ -86,7 +92,12 @@ public class CardServiceImpl implements CardService {
     @Override
     @Transactional
     public void executePayment(PaymentRequestDTO paymentRequestDTO) {
-        Card card = cardRepository.getCardById(paymentRequestDTO.getId()).orElseThrow(() -> new CardNotFoundByIdException("Такой карты не существует"));
+        UsernamePasswordAuthenticationToken details = (UsernamePasswordAuthenticationToken) SecurityContextHolder.getContext().getAuthentication();
+        UserDetails userDetails = (UserDetails) details.getPrincipal();
+        String username = userDetails.getUsername();
+        User user = userRepository.findByEmail(username).orElse(null);
+        Card card = user.getCard();
+
         if(card.getBalance() <= 0 || paymentRequestDTO.getValue() > card.getBalance()){
             throw new InsufficientFundsException("Недостаточно средств");
         }
