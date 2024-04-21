@@ -12,6 +12,9 @@ import com.hackathon.prduction.services.TransactionService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.sql.Timestamp;
+import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -50,6 +53,12 @@ public class TransactionServiceImpl implements TransactionService {
     public List<TransactionResponseDTO> getAllTransactionsByUser(User user) {
         List<Transaction> transactions = transactionRepository.findAllByUser(user);
         List<TransactionResponseDTO> transactionResponseDTOList = transactionResponseMapper.toDto(transactions);
+        for(TransactionResponseDTO transactionResponseDTO : transactionResponseDTOList){
+            Timestamp time = transactionResponseDTO.getTime();
+            LocalDateTime now = time.toLocalDateTime();
+            Timestamp timestamp = Timestamp.valueOf(now.plusHours(3));
+            time.setTime(timestamp.toInstant().toEpochMilli());
+        }
         return transactionResponseDTOList;
     }
 
