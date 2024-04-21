@@ -24,9 +24,8 @@ import org.springframework.stereotype.Service;
 
 import java.beans.Transient;
 import java.sql.Timestamp;
-import java.util.Date;
+import java.time.LocalDateTime;
 import java.util.List;
-import java.util.Optional;
 import java.util.Optional;
 import java.util.Random;
 
@@ -104,7 +103,7 @@ public class CardServiceImpl implements CardService {
         Long balance = card.getBalance();
         balance = (balance - paymentRequestDTO.getValue());
         Transaction transaction = new Transaction();
-        Timestamp timestamp = new Timestamp((new Date().getTime()));
+        Timestamp timestamp = Timestamp.valueOf(LocalDateTime.now());
 
         transaction.setTime(timestamp);
         transaction.setName(paymentRequestDTO.getName());
