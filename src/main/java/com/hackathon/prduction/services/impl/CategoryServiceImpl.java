@@ -28,10 +28,8 @@ public class CategoryServiceImpl implements CategoryService {
 
     @Override
     public void deleteCategory(Long categoryId) throws CategoryNotFoundByIdException {
-        Category category = categoryRepo.findById(categoryId).orElse(null);
-        if(category == null){
-            throw new CategoryNotFoundByIdException("Category with such ID does not exist.");
-        }
+        Category category = categoryRepo.findById(categoryId)
+                .orElseThrow(() -> new CategoryNotFoundByIdException("Category with such ID does not exist."));
         categoryRepo.delete(category);
     }
 
@@ -44,12 +42,9 @@ public class CategoryServiceImpl implements CategoryService {
 
     @Override
     public CategoryRequestDTO getOneCategory(Long categoryId) throws CategoryNotFoundByIdException {
-        Category category = categoryRepo.findById(categoryId).orElse(null);
-        if(category == null) {
-            throw new CategoryNotFoundByIdException("Category with such ID does not exist.");
-        }
-        CategoryRequestDTO categoryRequestDTO = categoryRequestMapper.toDto(category);
-        return categoryRequestDTO;
+        Category category = categoryRepo.findById(categoryId)
+                .orElseThrow(() -> new CategoryNotFoundByIdException("Category with such ID does not exist."));
+        return categoryRequestMapper.toDto(category);
     }
 
 }

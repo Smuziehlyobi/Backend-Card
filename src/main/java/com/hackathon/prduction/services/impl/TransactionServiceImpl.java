@@ -65,12 +65,9 @@ public class TransactionServiceImpl implements TransactionService {
 
     @Override
     public TransactionRequestDTO getOneTransaction(Long transactionId) throws TransactionNotFoundByIdException {
-        Transaction transaction = transactionRepository.findById(transactionId).orElse(null);
-        if(transaction == null) {
-            throw new TransactionNotFoundByIdException("Transaction with such ID does not exist.");
-        }
-        TransactionRequestDTO transactionRequestDTO = transactionMapper.toDto(transaction);
-        return transactionRequestDTO;
+        Transaction transaction = transactionRepository.findById(transactionId)
+                .orElseThrow(() -> new TransactionNotFoundByIdException("Transaction with such ID does not exist."));
+        return transactionMapper.toDto(transaction);
     }
 
 }

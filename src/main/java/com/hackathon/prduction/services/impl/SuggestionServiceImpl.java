@@ -24,10 +24,8 @@ public class SuggestionServiceImpl implements SuggestionService {
 
     @Override
     public void deleteSuggestion(Long suggestionId) throws SuggestionNotFoundByIdException {
-        Suggestion suggestion = suggestionRepository.findById(suggestionId).orElse(null);
-        if (suggestion == null) {
-            throw new SuggestionNotFoundByIdException("Suggestion with such ID does not exist.");
-        }
+        Suggestion suggestion = suggestionRepository.findById(suggestionId)
+                .orElseThrow(() -> new SuggestionNotFoundByIdException("Suggestion with such ID does not exist."));
         suggestionRepository.delete(suggestion);
     }
 
@@ -40,12 +38,9 @@ public class SuggestionServiceImpl implements SuggestionService {
 
     @Override
     public SuggestionRequestDTO getOneSuggestion(Long suggestionId) throws SuggestionNotFoundByIdException {
-        Suggestion suggestion = suggestionRepository.findById(suggestionId).orElse(null);
-        if (suggestion == null) {
-            throw new SuggestionNotFoundByIdException("Suggestion with such ID does not exist.");
-        }
-        SuggestionRequestDTO suggestionRequestDTO = suggestionMapper.toDto(suggestion);
-        return suggestionRequestDTO;
+        Suggestion suggestion = suggestionRepository.findById(suggestionId)
+                .orElseThrow(() -> new SuggestionNotFoundByIdException("Suggestion with such ID does not exist."));
+        return suggestionMapper.toDto(suggestion);
     }
 }
 

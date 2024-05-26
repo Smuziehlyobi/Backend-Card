@@ -48,7 +48,7 @@ public class EventServiceImpl implements EventService {
         UsernamePasswordAuthenticationToken details = (UsernamePasswordAuthenticationToken) SecurityContextHolder.getContext().getAuthentication();
         UserDetails userDetails = (UserDetails) details.getPrincipal();
         String username = userDetails.getUsername();
-        User user = userRepository.findByEmail(username).orElseThrow(() -> new UsernameNotFoundException("Вас не существует в системе"));
+        User user = userRepository.findByEmail(username).orElseThrow(() -> new UsernameNotFoundException("You are not registred"));
         List<Event> list = new ArrayList<>(user.getEvents());
         return eventMapper.toDto(list);
     }
