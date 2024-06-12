@@ -75,12 +75,12 @@ jobs:
           distribution: 'adopt'
           java-version: '17'
 
-      # CRM Service
+      # Card service
 
       - name: Build Card Service with Maven
         run: mvn package -Dmaven.test.skip=true -P prod
 
-      - name: Push Docker Image of CRM service to Docker Hub
+      - name: Push Docker Image of Card service to Docker Hub
         uses: docker/build-push-action@v3
         with:
           context: .

@@ -4,7 +4,7 @@ server:
 spring:
   datasource:
       driver-class-name: org.postgresql.Driver
-      url: jdbc:postgresql://${POSTGRES_IP}:5432/${DB_NAME}
+      url: jdbc:postgresql://card-service-db:5432/${DB_NAME}
       username: ${POSTGRES_USER}
       password: ${POSTGRES_PASSWORD}
 
